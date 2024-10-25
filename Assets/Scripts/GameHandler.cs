@@ -34,7 +34,7 @@ public class GameHandler : MonoBehaviour
         StreamReader sr = new StreamReader("./Assets/FileData/CharacterInfo.txt");
         for (int i = 0; i < 10; i++)
         {
-            generatedInfo.Add(new CharacterInfo(i, sr.ReadLine()));
+            generatedInfo.Add(new CharacterInfo(sr.ReadLine()));
 
             Debug.Log("Is Murd: " + generatedInfo[i].IsMurderer() + "\n"
                         + "Name:  " + generatedInfo[i].Name() + "\n"
