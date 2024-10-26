@@ -18,10 +18,6 @@ public class InputManager : MonoBehaviour
     // Get the PlayerInput component
     private void Awake()
     {
-
-        var playerInput = GetComponent<PlayerInput>();
-    
-
         if (instance != null)
         {
             Debug.LogError("Found more than one Input Manager in the scene.");
