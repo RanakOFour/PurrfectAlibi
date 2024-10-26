@@ -18,8 +18,16 @@ public class DialogueManager : MonoBehaviour
 
     //Audio stuff
     [Header("Audio")]
-    [SerializeField] private DialogueAudioInfo defaultAudioInfo;
-    private DialogueAudioInfoSO currentAudioInfo;
+    [SerializeField] private AudioClip[] dialogueTypingSoundclips;
+    [SerializeField] private bool stopAudioSource;
+    [Range(1, 5)]
+    [SerializeField] private int frequencyLevel = 2;
+
+    [Range(-3, 3)]
+    [SerializeField] private float minPitch = 0.5f;
+    [Range(-3, 3)]
+    [SerializeField] private float maxPitch = 3f;
+
     private AudioSource audioSource;
 
     private Animator layoutAnimator;
@@ -50,7 +58,6 @@ public class DialogueManager : MonoBehaviour
         instance = this;
 
         audioSource = this.gameObject.AddComponent<AudioSource>();
-        currentAudioInfo = defaultAudioInfo;
     }
 
     public static DialogueManager GetInstance()
@@ -128,7 +135,6 @@ public class DialogueManager : MonoBehaviour
 
     private void PlayDialogueSound(int currentDisplayedCharacterCount)
     {
-        AudioClip[] dialogeTypingSoundClips = currentAudioInfo;
         if (currentDisplayedCharacterCount % frequencyLevel == 0)
         {
             if (stopAudioSource)
