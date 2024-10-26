@@ -18,10 +18,8 @@ public class DialogueManager : MonoBehaviour
 
     //Audio stuff
     [Header("Audio")]
-    [SerializeField] private AudioClip dialogueTypingSoundclip;
-    [SerializeField] private bool stopAudioSource;
-
-
+    [SerializeField] private DialogueAudioInfo defaultAudioInfo;
+    private DialogueAudioInfoSO currentAudioInfo;
     private AudioSource audioSource;
 
     private Animator layoutAnimator;
@@ -52,6 +50,7 @@ public class DialogueManager : MonoBehaviour
         instance = this;
 
         audioSource = this.gameObject.AddComponent<AudioSource>();
+        currentAudioInfo = defaultAudioInfo;
     }
 
     public static DialogueManager GetInstance()
@@ -121,6 +120,7 @@ public class DialogueManager : MonoBehaviour
         foreach (char letter in line.ToCharArray())
         {
             PlayDialogueSound(dialogueText.maxVisibleCharacters);
+            dialogueText.maxVisibleCharacters++;
             dialogueText.text += letter;
             yield return new WaitForSeconds(typingSpeed);
         }
@@ -128,13 +128,17 @@ public class DialogueManager : MonoBehaviour
 
     private void PlayDialogueSound(int currentDisplayedCharacterCount)
     {
-        if (currentDisplayedCharacterCount % 3 == 0)
+        AudioClip[] dialogeTypingSoundClips = currentAudioInfo;
+        if (currentDisplayedCharacterCount % frequencyLevel == 0)
         {
             if (stopAudioSource)
             {
                 audioSource.Stop();
             }
-            audioSource.PlayOneShot(dialogueTypingSoundclip);
+            int randomIndex = Random.Range(0, dialogueTypingSoundclips.Length);
+            AudioClip soundClip = dialogueTypingSoundclips[randomIndex];
+            audioSource.pitch = Random.Range(minPitch, maxPitch);
+            audioSource.PlayOneShot(soundClip);
         }
     }
 
