@@ -8,17 +8,12 @@ using UnityEngine.SceneManagement;
 
 public class GameHandler : MonoBehaviour
 {
-    private int m_timeIndex = 0;
+    private int m_currentRoom = -1;
     private List<CharacterInfo> m_characterInfo;
     private Dictionary<string, Clue> m_KnownClues;
 
     private void Start()
     {
-    }
-
-    private void Update()
-    {
-        
     }
 
     private void Awake()
@@ -70,6 +65,7 @@ public class GameHandler : MonoBehaviour
     public void StartNewGame()
     {
         //Gets seed as a long number that I can easily scan through digits with
+        m_currentRoom = -1;
         string strSeed = "";
 
         while(strSeed.Length < 64)
@@ -79,10 +75,12 @@ public class GameHandler : MonoBehaviour
 
         strSeed = strSeed.Substring(0, 64);
         m_characterInfo = GenerateInfo(strSeed);
+        SceneManager.LoadScene("MainMap");
     }
 
-    public void MoveScene(string _sceneName)
+    public void MoveScene(int _roomId)
     {
-        SceneManager.LoadScene(_sceneName);
+        m_currentRoom = _roomId;
+        SceneManager.LoadScene("Location");
     }
 }
