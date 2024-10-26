@@ -1,12 +1,10 @@
-using System;
 using System.Collections.Generic;
-using System.IO;
-using Unity.VisualScripting;
 using UnityEngine;
 
 
 public class CharacterInfo
 {
+    private int m_id;
     private bool m_isMurderer;
     private string m_name;
     private string m_description;
@@ -15,9 +13,10 @@ public class CharacterInfo
     private Clue m_alibi;
     private Clue[] m_clues;
 
-    public CharacterInfo(string fileData, string seed)
+    public CharacterInfo(string fileData, string seed, int id)
     {
         string[] seperated = fileData.Split(']');
+        this.m_id = id;
         this.m_name = seperated[0];
         this.m_description = seperated[1];
         this.m_characterRelations = new Dictionary<int, int>();
@@ -60,8 +59,16 @@ public class CharacterInfo
         Debug.Log(logString);
     }
 
+    public int GetId()
+    {
+        return m_id;
+    }
+
     public bool IsMurderer()
     { return m_isMurderer; }
+
+    public void SetMurderer(bool m)
+    { m_isMurderer = m; }
 
     public string Name()
     { return m_name; }

@@ -6,6 +6,9 @@ TagManager:
   tags:
   - TimeOfDay
   - Character
+  - LocationHandler
+  - DateTextController
+  - LocationButtons
   layers:
   - Default
   - TransparentFX
