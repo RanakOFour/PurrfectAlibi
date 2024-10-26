@@ -34,7 +34,7 @@ public class GameHandler : MonoBehaviour
             //Substring cuts out the '0.' at the beginning
             strSeed += UnityEngine.Random.value.ToString().Substring(2);
         }
-
+        //Pass seed into character info handler
         strSeed = strSeed.Substring(0, 64);
         m_characterInfo = new CharacterInfoHandler();
         m_characterInfo.Initialise(strSeed);
@@ -47,9 +47,11 @@ public class GameHandler : MonoBehaviour
         Clue murderClue = new Clue("A murder took place near Location " + murderLocation.ToString() + " on the night of the 22nd.");
 
         SceneManager.LoadScene("MainMap");
-        DialogueManager.GetInstance().EnterDialogueMode(inkJSON);
 
-        DialogueManager.GetInstance().EnterStoryChoice(murderLocation);
+        DialogueManager dm = DialogueManager.GetInstance();
+        dm.EnterDialogueMode(inkJSON);
+        Debug.Log("Muder location: " + murderLocation);
+        dm.EnterStoryChoice(murderLocation + 1);
     }
 
     public void MoveScene(int _roomId)

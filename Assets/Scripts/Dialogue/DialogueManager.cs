@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
 using Ink.Runtime;
+using UnityEngine.EventSystems;
 
 public class DialogueManager : MonoBehaviour
 {
@@ -78,13 +79,10 @@ public class DialogueManager : MonoBehaviour
 
     public void EnterStoryChoice(int index)
     {
-        currentStory.ChooseChoiceIndex(index);
-        ContinueStory();
-    }
 
-    public List<Choice> GetChoices()
-    {
-        return currentStory.currentChoices;
+        currentStory.ChooseChoiceIndex(index);
+        dialogueIsPlaying = true;
+        dialoguePanel.SetActive(true);
     }
 
     public void EnterDialogueMode(TextAsset inkJSON)
@@ -101,6 +99,15 @@ public class DialogueManager : MonoBehaviour
         dialogueIsPlaying = false;
         dialoguePanel.SetActive(false);
         dialogueText.text = "";
+
+        if (currentStory.currentChoices.Count > 0)
+        {
+            for (int i = 0; i < currentStory.currentChoices.Count; ++i)
+            {
+                Choice choice = currentStory.currentChoices[i];
+                Debug.Log("Choice " + (i + 1) + ". " + choice.text);
+            }
+        }
     }
 
     private void ContinueStory()
@@ -178,5 +185,11 @@ public class DialogueManager : MonoBehaviour
                     break;
             }
         }
+    }
+
+    private IEnumerator SelectFirstChoice()
+    {
+        EventSystem.current.SetSelectedGameObject(null);
+        yield return new WaitForEndOfFrame();
     }
 }

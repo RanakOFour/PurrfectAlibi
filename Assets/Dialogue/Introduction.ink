@@ -7,20 +7,20 @@
 
 
 == Introduction ==
-Current date: 23/7
+Current date: 23/8
 Fluffy, we have a new case! #speaker: Assistant #portrait: Assistant_default #Layout:Right
 What have you got for me? #speaker:Fluffy #portrait:Fluffy_Default #Layout:Left
 
-* [murderat0]
-There's been a murder near "Location 1"#speaker: Assistant #portrait: Assistant_default #Layout:Right -> CONT
-* [murderat1]
-There's been a murder near "Location 2"#speaker: Assistant #portrait: Assistant_default #Layout:Right -> CONT
-* [murderat2]
-There's been a murder near "Location 3"#speaker: Assistant #portrait: Assistant_default #Layout:Right -> CONT
-* [murderat3]
-There's been a murder near "Location 4"#speaker: Assistant #portrait: Assistant_default #Layout:Right -> CONT
-* [murderat4]
-There's been a murder near "Location 5"#speaker: Assistant #portrait: Assistant_default #Layout:Right -> CONT
+*   [murderat0]
+    There's been a murder near "Location 1"#speaker: Assistant #portrait: Assistant_default #Layout:Right -> CONT
+*   [murderat1]
+    There's been a murder near "Location 2"#speaker: Assistant #portrait: Assistant_default #Layout:Right -> CONT
+*   [murderat2]
+    There's been a murder near "Location 3"#speaker: Assistant #portrait: Assistant_default #Layout:Right -> CONT
+*   [murderat3]
+    There's been a murder near "Location 4"#speaker: Assistant #portrait: Assistant_default #Layout:Right -> CONT
+*   [murderat4]
+    There's been a murder near "Location 5"#speaker: Assistant #portrait: Assistant_default #Layout:Right -> CONT
 
 = CONT
 I'll go see what I can find... #speaker:Fluffy #portrait:Fluffy_Default #Layout:Left -> DONE

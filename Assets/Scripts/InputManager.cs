@@ -33,25 +33,21 @@ public class InputManager : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.E)) // e key pressed
         {
             interactPressed = true;
-            Debug.Log("Interact key pressed.");
         }
 
         if (Input.GetKeyUp(KeyCode.E)) // e key pressed
         {
             interactPressed = false;
-            Debug.Log("Interact key released.");
         }
 
         if (Input.GetKeyDown(KeyCode.F)) // e key pressed
         {
             submitPressed = true;
-            Debug.Log("Submit key pressed.");
         }
 
         if (Input.GetKeyUp(KeyCode.F)) // e key pressed
         {
             submitPressed = false;
-            Debug.Log("Submit key released.");
         }
     }
 
