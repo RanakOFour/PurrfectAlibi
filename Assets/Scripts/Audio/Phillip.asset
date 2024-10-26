@@ -10,14 +10,13 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 73f3eaa452627b142840325bdb2e8943, type: 3}
-  m_Name: default
+  m_Name: Phillip
   m_EditorClassIdentifier: 
-  id: default
+  id: Phillip
   dialogueTypingSoundclips:
-  - {fileID: 8300000, guid: 18897fc1048fca947a1a0939a6fb6d7a, type: 3}
-  - {fileID: 8300000, guid: 90e9c90d191635549a036f0602f1d942, type: 3}
-  - {fileID: 8300000, guid: d6c9c52f95026434d9af971dc54ff5cb, type: 3}
+  - {fileID: 8300000, guid: 2a81039a72954724d86149433fe4a92b, type: 3}
+  - {fileID: 8300000, guid: 6852fe955e8d6114aaa5ff82e6b906e2, type: 3}
   stopAudioSource: 0
   frequencyLevel: 2
-  minPitch: 0.5
-  maxPitch: 3
+  minPitch: 1.31
+  maxPitch: 1.86
