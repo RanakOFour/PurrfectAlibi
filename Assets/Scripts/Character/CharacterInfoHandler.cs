@@ -4,12 +4,16 @@ using UnityEngine;
 
 public class CharacterInfoHandler
 {
-    List<CharacterInfo> m_characterInfo;
+    private int murdererId;
+    private List<CharacterInfo> m_characterInfo;
 
-    public CharacterInfoHandler(string seed)
+    public CharacterInfoHandler()
     {
         m_characterInfo = new List<CharacterInfo>();
+    }
 
+    public void Initialise(string seed)
+    {
         //Create a file reader
         StreamReader sr = new StreamReader("./Assets/FileData/CharacterInfo.txt");
 
@@ -35,11 +39,6 @@ public class CharacterInfoHandler
                 }
             }
         }
-
-        //Get a random char from the seed and that digit mod 7 is the murderer
-        int murderer = int.Parse(seed[Mathf.RoundToInt(UnityEngine.Random.Range(0, 63))].ToString()) % 7;
-        m_characterInfo[murderer].SetMurderer(true);
-
         //To do!!
         // Alibis and clue generation
         // Deciding the murderer (happened previous evening near (but not at) location X
@@ -57,5 +56,16 @@ public class CharacterInfoHandler
         }
 
         return toReturn;
+    }
+
+    public void AssignMurderer(int id)
+    {
+        m_characterInfo[id].SetMurderer(true);
+        murdererId = id;
+    }
+
+    public CharacterInfo GetMurderer()
+    {
+        return m_characterInfo[murdererId];
     }
 }

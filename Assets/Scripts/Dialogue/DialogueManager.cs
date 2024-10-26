@@ -26,9 +26,6 @@ public class DialogueManager : MonoBehaviour
 
     private Animator layoutAnimator;
     private Story currentStory;
-
-    
-
     public bool dialogueIsPlaying{get; private set; }
 
     private Coroutine displayLineCoroutine;
@@ -77,6 +74,17 @@ public class DialogueManager : MonoBehaviour
         {
             ContinueStory();
         }
+    }
+
+    public void EnterStoryChoice(int index)
+    {
+        currentStory.ChooseChoiceIndex(index);
+        ContinueStory();
+    }
+
+    public List<Choice> GetChoices()
+    {
+        return currentStory.currentChoices;
     }
 
     public void EnterDialogueMode(TextAsset inkJSON)
@@ -168,10 +176,6 @@ public class DialogueManager : MonoBehaviour
                 default:
                     Debug.LogWarning("Tag came in but is not currently being handled: " + tag);
                     break;
-
-
-            
-                
             }
         }
     }

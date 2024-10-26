@@ -3,7 +3,7 @@ public class Clue
     public bool isKnown;
     private string Information;
 
-    Clue(string info)
+    public Clue(string info)
     {
         isKnown = false;
         Information = info;
@@ -11,12 +11,7 @@ public class Clue
 
     public string Peek()
     {
-        if(isKnown)
-        {
-            return Information;
-        }
-
-        return null;
+        return Information;
     }
 
     public string Discover()

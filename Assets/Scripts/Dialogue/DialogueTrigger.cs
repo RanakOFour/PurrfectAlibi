@@ -23,16 +23,16 @@ public class DialogueTrigger : MonoBehaviour
     {
        if (playerInRange && !DialogueManager.GetInstance().dialogueIsPlaying) 
        {
-        visualCue.SetActive(true); // sets the visual cue to be active which is the icon above the players head
-        if(InputManager.GetInstance().GetInteractPressed()) // if e is pressed
-        {
-            DialogueManager.GetInstance().EnterDialogueMode(inkJSON); // enter the inkJSON file into the dialogue box
-        }
+            visualCue.SetActive(true); // sets the visual cue to be active which is the icon above the players head
+            if(InputManager.GetInstance().GetInteractPressed()) // if e is pressed
+            {
+                DialogueManager.GetInstance().EnterDialogueMode(inkJSON); // enter the inkJSON file into the dialogue box
+            } 
 
        }
        else
        {
-        visualCue.SetActive(false); // hides the visual cue from your screen
+            visualCue.SetActive(false); // hides the visual cue from your screen
        }
     }
 
@@ -41,16 +41,14 @@ public class DialogueTrigger : MonoBehaviour
         if (collide.gameObject.tag == "Player")
         {
             playerInRange = true; // player in range when colliding with player tag
-           
         }
     }
 
     private void OnTriggerExit(Collider collide)
     {
-          if (collide.gameObject.tag == "Player")
+        if (collide.gameObject.tag == "Player")
         {
             playerInRange = false; // when players not in range set false
-            
         }
     }
 }
