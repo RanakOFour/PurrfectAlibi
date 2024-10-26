@@ -33,15 +33,36 @@ public class GameHandler : MonoBehaviour
         Debug.Log("Seed: " + seed);
         //Create a file reader
         StreamReader sr = new StreamReader("./Assets/FileData/CharacterInfo.txt");
+        
+        //Fill in character relations & appearance patterns
         for (int i = 0; i < 8; i++)
         {
             Debug.Log("Current string partition: " + seed.Substring(i * 8, 8));
             generatedInfo.Add(new CharacterInfo(sr.ReadLine(), seed.Substring(i * 8, 8)));
-
-            //Input names from 
-            //Debug.Log("Name:  " + generatedInfo[i].Name() + "\n" + "Desc: " + generatedInfo[i].Description() + "\n");
         }
 
+        //Set character relations to be the highest between each pair of generated 'relation levels'
+        for(int i = 0; i < 8; i++)
+        {
+            for(int j = i; j < 8; j++)
+            {
+                for (int k = 0; k < 3; k++)
+                {
+                    if (generatedInfo[i].GetRelationWith(j) > generatedInfo[j].GetRelationWith(i))
+                    {
+                        generatedInfo[j].SetRelationWith(i, generatedInfo[i].GetRelationWith(j));
+                    }
+                    else
+                    {
+                        generatedInfo[i].SetRelationWith(j, generatedInfo[j].GetRelationWith(i));
+                    }
+                }
+            }
+        }
+
+        //To do!!
+        // Alibis and clue generation
+        // Deciding the murderer (happened previous evening near (but not at) location X
 
         return generatedInfo;
     }    

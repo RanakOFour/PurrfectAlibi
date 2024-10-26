@@ -27,13 +27,15 @@ public class CharacterInfo
         {
             if(i % 2 == 1)
             {
+                //Locations will be between 0 and 4
                 m_hangoutSpots.Add(int.Parse(seed[i].ToString()) % 5);
             }
 
             m_characterRelations.Add(i, 0);
-            m_characterRelations[i] += int.Parse(seed[i].ToString());
-        }
 
+            //Relationships will be between 0 and 4, indicating a strong dislike to strong like
+            m_characterRelations[i] += int.Parse(seed[i].ToString()) % 5;
+        }
 
         //Print finished character info
         string logString = "Name: " + m_name + "\n" +
@@ -44,9 +46,9 @@ public class CharacterInfo
         {
             logString += m_hangoutSpots[i].ToString() + ", ";
         }
-        logString += "\nCharacter relations: 0  1  2  3  4  5  6  7\n                               ";
+        logString += "\nCharacter relations: 0  1  2  3  4  5  6  7\n                                    ";
 
-        for (int i = 0; i < m_characterRelations.Count - 1; i++)
+        for (int i = 0; i < m_characterRelations.Count; i++)
         {
             logString += m_characterRelations[i].ToString() + " ";
             if(m_characterRelations[i] < 10)
@@ -70,5 +72,15 @@ public class CharacterInfo
     public int GetCurrentHangout(int time)
     {
         return m_hangoutSpots[time];
+    }
+
+    public int GetRelationWith(int character)
+    {
+        return m_characterRelations[character];
+    }
+
+    public void SetRelationWith(int character, int relation)
+    {
+        m_characterRelations[character] = relation;
     }
 }
