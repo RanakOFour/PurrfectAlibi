@@ -1,10 +1,9 @@
-True Nancy Fox
-False Dylan Frog
-True Nancy Fox
-False Dylan Frog
-True Nancy Fox
-False Dylan Frog
-True Nancy Fox
-False Dylan Frog
-True Nancy Fox
-False Dylan Frog
+Nancy]Fox]
+Dylan]Shark]
+Nancy]Turkey]
+Dylan]Frog]
+Nancy]Cat]
+Dylan]Bunny]
+Nancy]Platypus]
+Dylan]Squirrel]
+Nancy]Bear]

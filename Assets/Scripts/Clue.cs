@@ -6,9 +6,9 @@ public class Clue
     public bool isKnown;
     private string Information;
 
-    Clue(bool known, string info)
+    Clue(string info)
     {
-        isKnown = known;
+        isKnown = false;
         Information = info;
     }
 
