@@ -8,7 +8,7 @@ public class CharacterInfo
     private bool m_isMurderer;
     private string m_name;
     private string m_description;
-    private List<int> m_hangoutSpots;
+    private int[] m_hangoutSpots;
     private Dictionary<int, int> m_characterRelations;
     private Clue m_alibi;
     private Clue[] m_clues;
@@ -20,14 +20,14 @@ public class CharacterInfo
         this.m_name = seperated[0];
         this.m_description = seperated[1];
         this.m_characterRelations = new Dictionary<int, int>();
-        this.m_hangoutSpots = new List<int>();
+        this.m_hangoutSpots = new int[3];
 
         for (int i = 0; i < 8; i++)
         {
-            if(i % 2 == 1)
+            if(i <= 2)
             {
                 //Locations will be between 0 and 4
-                m_hangoutSpots.Add(int.Parse(seed[i].ToString()) % 5);
+                m_hangoutSpots[i] = int.Parse(seed[i].ToString()) % 5;
             }
 
             m_characterRelations.Add(i, 0);
@@ -41,7 +41,7 @@ public class CharacterInfo
                   "Desc: " + m_description + "\n" +
                   "Hangouts: ";
         
-        for(int i = 0; i < m_hangoutSpots.Count - 1; i++)
+        for(int i = 0; i < m_hangoutSpots.Length; i++)
         {
             logString += m_hangoutSpots[i].ToString() + ", ";
         }

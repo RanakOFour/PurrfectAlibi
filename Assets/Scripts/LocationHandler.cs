@@ -12,14 +12,14 @@ public class LocationHandler : MonoBehaviour
         m_characters = GameObject.FindGameObjectsWithTag("Character").ToList();
         Debug.Log("Characters: " + m_characters.Count);
         GameHandler gameHandler = GameObject.FindGameObjectWithTag("GameController").GetComponent<GameHandler>();
-        SetupScene(gameHandler.GetPresentCharacters(), gameHandler.GetRoom());
+        SetupScene(gameHandler.GetPresentCharacters());
     }
 
-    public void SetupScene(List<int> characters, int roomId)
+    public void SetupScene(List<int> characters)
     {
         for(int i = 0; i < characters.Count; i++)
         {
-            if (characters[i] != roomId)
+            if (!characters.Contains(i))
             {
                 m_characters[i].SetActive(false);
             }

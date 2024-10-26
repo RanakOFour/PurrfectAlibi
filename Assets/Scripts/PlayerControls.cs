@@ -27,7 +27,7 @@ public class PlayerControls : MonoBehaviour
 
         if(velocityMask != Vector3.zero)
         {
-            rb.AddForce(15 * velocityMask);
+            rb.AddForce(20 * velocityMask * Time.deltaTime);
         }
 
         if(Input.GetKeyDown(KeyCode.E))

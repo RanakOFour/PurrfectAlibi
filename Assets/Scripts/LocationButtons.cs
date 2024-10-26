@@ -13,9 +13,14 @@ public class LocationButtons : MonoBehaviour
     {
         m_gameHandler = GameObject.FindGameObjectWithTag("GameController").GetComponent<GameHandler>();
         m_buttons = GameObject.FindGameObjectsWithTag("LocationButtons");
-        for(int i = 0; i < 5; i++)
-        {
-            m_buttons[i].GetComponent<Button>().onClick.AddListener(() => m_gameHandler.MoveScene(i));
-        }
+
+        //Game grabs the buttons in order 15243
+
+        m_buttons[0].GetComponent<Button>().onClick.AddListener(() => m_gameHandler.MoveScene(0));
+        m_buttons[1].GetComponent<Button>().onClick.AddListener(() => m_gameHandler.MoveScene(4));
+        m_buttons[2].GetComponent<Button>().onClick.AddListener(() => m_gameHandler.MoveScene(1));
+        m_buttons[3].GetComponent<Button>().onClick.AddListener(() => m_gameHandler.MoveScene(3));
+        m_buttons[4].GetComponent<Button>().onClick.AddListener(() => m_gameHandler.MoveScene(2));
+        
     }
 }
