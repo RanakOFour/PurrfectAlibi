@@ -1346,6 +1346,8 @@ MonoBehaviour:
   audioInfos:
   - {fileID: 11400000, guid: ab006fd323e8b874294446e35d98cd91, type: 2}
   - {fileID: 11400000, guid: f59234b0b487f73468b171106b65bf60, type: 2}
+  - {fileID: 11400000, guid: 2d2add2c5e530fe448490029f36876f2, type: 2}
+  - {fileID: 11400000, guid: 6dacbbb24ddb9f04786a98ba597a1dc6, type: 2}
 --- !u!1 &1278280514
 GameObject:
   m_ObjectHideFlags: 0
