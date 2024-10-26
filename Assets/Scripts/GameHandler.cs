@@ -46,19 +46,19 @@ public class GameHandler : MonoBehaviour
         {
             for(int j = i; j < 8; j++)
             {
-                for (int k = 0; k < 3; k++)
-                {
-                    if (generatedInfo[i].GetRelationWith(j) > generatedInfo[j].GetRelationWith(i))
-                    {
-                        generatedInfo[j].SetRelationWith(i, generatedInfo[i].GetRelationWith(j));
-                    }
-                    else
-                    {
-                        generatedInfo[i].SetRelationWith(j, generatedInfo[j].GetRelationWith(i));
-                    }
-                }
+               if (generatedInfo[i].GetRelationWith(j) > generatedInfo[j].GetRelationWith(i))
+               {
+                   generatedInfo[j].SetRelationWith(i, generatedInfo[i].GetRelationWith(j));
+               }
+               else
+               {
+                   generatedInfo[i].SetRelationWith(j, generatedInfo[j].GetRelationWith(i));
+               }
             }
         }
+
+        //Get a random char from the seed and that digit mod 7 is the murderer
+        int murderer = int.Parse(seed[Mathf.RoundToInt(UnityEngine.Random.Range(0, 63))].ToString()) % 7;
 
         //To do!!
         // Alibis and clue generation
