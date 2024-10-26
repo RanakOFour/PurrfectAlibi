@@ -27,17 +27,7 @@ public class PlayerControls : MonoBehaviour
 
         if(velocityMask != Vector3.zero)
         {
-            rb.AddForce(20 * velocityMask * Time.deltaTime);
-        }
-
-        if(Input.GetKeyDown(KeyCode.E))
-        {
-            playerSprite.sprite = sprites[0];
-        }
-
-        if(Input.GetKeyDown(KeyCode.F))
-        {
-            playerSprite.sprite = sprites[1];
+            rb.AddForce(20 * velocityMask);
         }
 
         if(velocityMask.x == -1.0f)
