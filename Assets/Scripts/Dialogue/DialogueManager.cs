@@ -12,6 +12,7 @@ public class DialogueManager : MonoBehaviour
     [SerializeField] private TextMeshProUGUI dialogueText;
     [SerializeField] private TextMeshProUGUI displayNameText;
     [SerializeField] private Animator portraitAnimation;
+    private Animator layoutAnimator;
     private Story currentStory;
 
     public bool dialogueIsPlaying{get; private set; }
@@ -43,6 +44,8 @@ public class DialogueManager : MonoBehaviour
     {
         dialogueIsPlaying = false;
         dialoguePanel.SetActive(false);
+
+        layoutAnimator = dialoguePanel.GetComponent<Animator>();
     }
     private void Update()
     {
@@ -112,7 +115,7 @@ public class DialogueManager : MonoBehaviour
                     break;
 
                 case LAYOUT_TAG:
-                    Debug.Log("Layout= " + tagValue);
+                    layoutAnimator.Play(tagValue);
                     break;
                 default:
                     Debug.LogWarning("Tag came in but is not currently being handled: " + tag);
