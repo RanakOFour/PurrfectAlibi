@@ -4,10 +4,10 @@ VAR murderLocation = ""
 
 == Introduction ==
 Current date: 23/8
-Fluffy, we have a new case! #speaker: Assistant #portrait:Assistant_default #layout:Right
-What have you got for me? #speaker:Fluffy #portrait:Fluffy_Normal #layout:Left
+Fluffy, we have a new case! #speaker: Assistant #portrait:Assistant_default #layout:Right 
+What have you got for me? #speaker:Fluffy #portrait:Fluffy_Normal #layout:Left #audio:Fluffy
 Last night, {victim} was murdered near "Location {murderLocation}"!#speaker: Assistant #portrait:Assistant_default #layout:Right
-Alright, I'll go see what I can find... #speaker:Fluffy #portrait:Fluffy_Normal #layout:Left
+Alright, I'll go see what I can find... #speaker:Fluffy #portrait:Fluffy_Normal #layout:Left #audio:Fluffy
 -> DONE
 
 == Tutorial ==
