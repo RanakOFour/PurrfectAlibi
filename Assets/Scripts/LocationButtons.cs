@@ -21,6 +21,19 @@ public class LocationButtons : MonoBehaviour
         m_buttons[2].GetComponent<Button>().onClick.AddListener(() => m_gameHandler.MoveScene(1));
         m_buttons[3].GetComponent<Button>().onClick.AddListener(() => m_gameHandler.MoveScene(3));
         m_buttons[4].GetComponent<Button>().onClick.AddListener(() => m_gameHandler.MoveScene(2));
+        SetButtonsInteractable(false); 
+        DialogueManager.GetInstance().OnDialogueStart += () => SetButtonsInteractable(false);
+        DialogueManager.GetInstance().OnDialogueEnd += () => SetButtonsInteractable(true);
+
         
     }
+
+    private void SetButtonsInteractable(bool state)
+    {
+        foreach (var button in m_buttons)
+        {
+            button.GetComponent<Button>().interactable = state;
+        }
+    }
+    
 }
