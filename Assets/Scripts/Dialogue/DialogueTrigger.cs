@@ -11,13 +11,24 @@ public class DialogueTrigger : MonoBehaviour
     [Header("Story")]
     [SerializeField] public Story charStory;
 
+    private CharacterInfo charInfo;
+
+    
     private bool playerInRange; //Checks if player is in range
+    private GameHandler gameHandler;
+
+    public void SetCharInfo(CharacterInfo charInfo)
+    {
+        this.charInfo = charInfo;
+        charInfo.GetSpokenTo();
+    }
 
     private void Awake()
     {
         // by default these are set to false so when you enter it later it becomes true
         playerInRange = false;
         visualCue.SetActive(false); 
+        gameHandler = GameObject.FindGameObjectWithTag("GameController").GetComponent<GameHandler>();
     }
 
     private void Update()
@@ -28,6 +39,10 @@ public class DialogueTrigger : MonoBehaviour
             if(InputManager.GetInstance().GetInteractPressed()) // if e is pressed
             {
                 DialogueManager.GetInstance().EnterDialogueMode(charStory); // enter the inkJSON file into the dialogue box
+                gameHandler.shouldAdvanceTime = true;
+                gameHandler.AddClue(charInfo.GetId(), charInfo.GetClues()[charInfo.GetSpokenTo()]);
+                charInfo.AddSpoken();
+
             } 
 
        }

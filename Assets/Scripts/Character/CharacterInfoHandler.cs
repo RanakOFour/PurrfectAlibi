@@ -78,6 +78,13 @@ public class CharacterInfoHandler
 
         m_characterInfo[potMur].SetMurderer(true);
         murdererId = potMur;
+
+        Debug.Log("Victim: " + m_characterInfo[victimId].Name() + "\nMurderer: " + m_characterInfo[murdererId].Name());
+
+        foreach(CharacterInfo ci in m_characterInfo)
+        {
+            ci.SetRelationClue(victimId);
+        }
     }
 
     public CharacterInfo GetInfo(string name)

@@ -116,15 +116,6 @@ public class DialogueManager : MonoBehaviour
         currentStory.ChooseChoiceIndex(index);
     }
 
-    public void EnterDialogueMode(TextAsset inkJSON)
-    {
-        currentStory = new Story(inkJSON.text); // dialogue will show the inkJSON
-        dialogueIsPlaying = true;
-        dialoguePanel.SetActive(true);
-
-        ContinueStory();
-    }
-
     public void EnterDialogueMode(Story story)
     {
         currentStory = story; // dialogue will show the inkJSON

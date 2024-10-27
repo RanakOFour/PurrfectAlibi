@@ -21,5 +21,6 @@ public class CharacterHandler : MonoBehaviour
         characterInfo = gameHandler.GetInfo(gameObject.name);
 
         trigger.GetComponent<DialogueTrigger>().charStory = characterInfo.Story();
+        trigger.GetComponent<DialogueTrigger>().SetCharInfo(characterInfo);
     }
 }

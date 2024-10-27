@@ -6,6 +6,7 @@ using UnityEngine;
 public class CharacterInfo
 {
     private int m_id;
+    private int spokenTo;
     private bool m_isVictim;
     private bool m_isMurderer;
     private string m_name;
@@ -13,8 +14,8 @@ public class CharacterInfo
     private int[] m_hangoutSpots;
     private Dictionary<int, int> m_characterRelations;
     private Story m_story;
-    private Clue m_alibi;
-    private Clue[] m_clues;
+    private string m_alibi;
+    private string[] m_clues;
 
     public CharacterInfo(string fileData, string seed, int id, TextAsset story)
     {
@@ -25,6 +26,8 @@ public class CharacterInfo
         this.m_characterRelations = new Dictionary<int, int>();
         this.m_hangoutSpots = new int[3];
         this.m_story = new Story(story.text);
+        this.m_clues = new string[3];
+        this.spokenTo = 0;
 
         for (int i = 0; i < 8; i++)
         {
@@ -62,8 +65,10 @@ public class CharacterInfo
 
         Debug.Log(logString);
 
-        m_alibi = new Clue("I was at 'Location " + m_hangoutSpots[2] + ".");
-        m_story.variablesState["alibi"] = m_alibi.Peek();
+        m_alibi = "I was at 'Location " + (m_hangoutSpots[2] + 1) + "'.";
+        m_story.variablesState["alibi"] = m_alibi;
+        m_story.variablesState["speaker"] = m_name;
+
     }
 
     public Story Story()
@@ -105,24 +110,63 @@ public class CharacterInfo
         m_characterRelations[character] = relation;
     }
 
-    public void SetAlibi(Clue alibi)
+    public void SetAlibi(string alibi)
     {
        m_alibi = alibi;
     }
 
-    public Clue GetAlibi()
+    public string GetAlibi()
     {
         return m_alibi;
     }
 
     
-    public void SetClues(Clue[] clues)
+    public void SetClues(string[] clues)
     {
         m_clues = clues;
     }
 
-    public Clue[] GetClues()
+    public string[] GetClues()
     {
-        return m_clues;
+        string[] clue = new string[] { m_alibi, m_clues[0], m_clues[1], m_clues[2] };
+        return clue;
+    }
+
+    public int GetSpokenTo()
+    { return spokenTo; }
+
+    public void AddSpoken()
+    {
+        spokenTo++;
+    }
+
+    public void SetRelationClue(int victimId)
+    {
+        string clue1 = "";
+        switch(m_characterRelations[victimId])
+        {
+            case 0:
+                clue1 += "I was not very good friends with them.";
+                break;
+
+            case 1:
+                clue1 += "We didn't get along.";
+                break;
+
+            case 2:
+                clue1 += "We hung out a few times.";
+                break;
+
+            case 3:
+                clue1 += "We were friends.";
+                break;
+
+            case 4:
+                clue1 += "We were good friends.";
+                break;
+        }
+
+        m_clues[0] = clue1;
+        m_story.variablesState["clue1"] = clue1;
     }
 }

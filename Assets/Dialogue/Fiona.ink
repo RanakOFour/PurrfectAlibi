@@ -1,3 +1,4 @@
+VAR speaker = ""
 VAR alibi = ""
 VAR clue1 = ""
 VAR clue2 = ""
@@ -17,30 +18,30 @@ VAR spokenTo = 0
 }
 
 == ALIBI ==
-Excuse me, ma'am? #speaker:Fluffy #portrait:Fluffy_Normal #layout:Left
-Yes? #speaker:Fiona #portrait:Fiona 
+Excuse me? #speaker:Fluffy #portrait:Fluffy_Normal #layout:Left
+Yes? #speaker:{speaker} #portrait:{speaker} 
 Detective Fluffy, don't mind if I ask you a few questions? #speaker:Fluffy #portrait:Fluffy_Normal #layout:Left
-Go ahead #speaker:Fiona #portrait:Fiona 
+Go ahead #speaker:{speaker} #portrait:{speaker}  
 Where were you on the night of the 22nd? #speaker:Fluffy #portrait:Fluffy_Normal #layout:Left
-{alibi} #speaker:Fiona #portrait:Fiona 
+{alibi} #speaker:{speaker} #portrait:{speaker}  
 -> DONE
 
 == CLUE1 ==
 Do you have anything else you could tell me? #speaker:Fluffy #portrait:Fluffy_Normal #layout:Left
-{clue1} #speaker:Fiona #portrait:Fiona 
+{clue1}#speaker:{speaker} #portrait:{speaker}  
 -> DONE
 
 == CLUE2 ==
 Do you have anything else you could tell me? #speaker:Fluffy #portrait:Fluffy_Normal #layout:Left
-{clue2} #speaker:Fiona #portrait:Fiona 
+{clue2} #speaker:{speaker} #portrait:{speaker}  
 -> DONE
 
 == CLUE3 ==
 Do you have anything else you could tell me? #speaker:Fluffy #portrait:Fluffy_Normal #layout:Left
-{clue3} #speaker:Fiona #portrait:Fiona 
+{clue3} #speaker:{speaker} #portrait:{speaker}  
 -> DONE
 
 == EXTRA ==
 Do you have anything else you could tell me? #speaker:Fluffy #portrait:Fluffy_Normal #layout:Left
-Sorry, I've told you everything I know... #speaker:Fiona #portrait:Fiona 
+Sorry, I've told you everything I know... #speaker:{speaker} #portrait:{speaker}  
 -> DONE

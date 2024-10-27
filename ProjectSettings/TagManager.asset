@@ -10,6 +10,7 @@ TagManager:
   - DateTextController
   - LocationButtons
   - NPC
+  - Notebook
   layers:
   - Default
   - TransparentFX
