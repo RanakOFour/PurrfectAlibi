@@ -50,7 +50,6 @@ public class GameHandler : MonoBehaviour
 
         DialogueManager dm = DialogueManager.GetInstance();
         dm.EnterDialogueMode(inkJSON);
-        Debug.Log("Muder location: " + murderLocation);
         dm.EnterStoryChoice(murderLocation + 1);
     }
 
