@@ -72,7 +72,7 @@ public class GameHandler : MonoBehaviour
         }
     }
 
-    private void AdvanceTime()
+    public void AdvanceTime()
     {
         m_dayPart++;
 
@@ -102,5 +102,10 @@ public class GameHandler : MonoBehaviour
     public CharacterInfo GetInfo(string character)
     {
         return m_characterInfo.GetInfo(character);
+    }
+
+    public void IncrementDate()
+    {
+        AdvanceTime(); // Use the existing method to update time
     }
 }

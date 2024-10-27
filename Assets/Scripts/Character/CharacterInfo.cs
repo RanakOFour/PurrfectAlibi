@@ -106,4 +106,25 @@ public class CharacterInfo
     {
         m_characterRelations[character] = relation;
     }
+
+        public void SetAlibi(Clue alibi)
+    {
+        m_alibi = alibi;
+    }
+
+    public Clue GetAlibi()
+    {
+        return m_alibi;
+    }
+
+    
+    public void SetClues(Clue[] clues)
+    {
+        m_clues = clues;
+    }
+
+    public Clue[] GetClues()
+    {
+        return m_clues;
+    }
 }
