@@ -1,3 +1,4 @@
+using Ink.Runtime;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -5,15 +6,17 @@ using UnityEngine;
 public class CharacterInfo
 {
     private int m_id;
+    private bool m_isVictim;
     private bool m_isMurderer;
     private string m_name;
     private string m_description;
     private int[] m_hangoutSpots;
     private Dictionary<int, int> m_characterRelations;
+    private Story m_story;
     private Clue m_alibi;
     private Clue[] m_clues;
 
-    public CharacterInfo(string fileData, string seed, int id)
+    public CharacterInfo(string fileData, string seed, int id, TextAsset story)
     {
         string[] seperated = fileData.Split(']');
         this.m_id = id;
@@ -21,6 +24,7 @@ public class CharacterInfo
         this.m_description = seperated[1];
         this.m_characterRelations = new Dictionary<int, int>();
         this.m_hangoutSpots = new int[3];
+        this.m_story = new Story(story.text);
 
         for (int i = 0; i < 8; i++)
         {
@@ -57,12 +61,24 @@ public class CharacterInfo
         }
 
         Debug.Log(logString);
+
+        m_alibi = new Clue("I was at 'Location " + m_hangoutSpots[2] + ".");
+        m_story.variablesState["alibi"] = m_alibi.Peek();
     }
+
+    public Story Story()
+        { return m_story; }
 
     public int GetId()
     {
         return m_id;
     }
+
+    public bool IsVictim()
+    { return m_isVictim; }
+
+    public void SetVictim(bool vic)
+    { m_isVictim = vic; }
 
     public bool IsMurderer()
     { return m_isMurderer; }

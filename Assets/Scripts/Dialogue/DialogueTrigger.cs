@@ -1,3 +1,4 @@
+using Ink.Runtime;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -7,8 +8,8 @@ public class DialogueTrigger : MonoBehaviour
     [Header("Visual Cue")]
     [SerializeField] private GameObject visualCue;
 
-    [Header("Ink JSON")]
-    [SerializeField] private TextAsset inkJSON;
+    [Header("Story")]
+    [SerializeField] public Story charStory;
 
     private bool playerInRange; //Checks if player is in range
 
@@ -26,7 +27,7 @@ public class DialogueTrigger : MonoBehaviour
             visualCue.SetActive(true); // sets the visual cue to be active which is the icon above the players head
             if(InputManager.GetInstance().GetInteractPressed()) // if e is pressed
             {
-                DialogueManager.GetInstance().EnterDialogueMode(inkJSON); // enter the inkJSON file into the dialogue box
+                DialogueManager.GetInstance().EnterDialogueMode(charStory); // enter the inkJSON file into the dialogue box
             } 
 
        }

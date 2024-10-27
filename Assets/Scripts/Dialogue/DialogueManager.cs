@@ -4,6 +4,7 @@ using UnityEngine;
 using TMPro;
 using Ink.Runtime;
 using UnityEngine.EventSystems;
+using UnityEditor.VisionOS;
 
 public class DialogueManager : MonoBehaviour
 {
@@ -22,7 +23,6 @@ public class DialogueManager : MonoBehaviour
     [Header("Audio")]
     [SerializeField] private DialogueAudioInfoSO defaultAudioInfo;
     [SerializeField] private DialogueAudioInfoSO[] audioInfos;
-
     private DialogueAudioInfoSO currentAudioInfo;
     private Dictionary<string,  DialogueAudioInfoSO> audioInfoDictionary;
 
@@ -60,6 +60,7 @@ public class DialogueManager : MonoBehaviour
     {
         return instance;
     }
+
     private void Start()
     {
         dialogueIsPlaying = false;
@@ -69,13 +70,14 @@ public class DialogueManager : MonoBehaviour
 
         InitializeAudioInfoDictionary(); // initialised the audioinfo dictionary at the start
     }
+
     private void InitializeAudioInfoDictionary()
     {
        audioInfoDictionary = new Dictionary<string, DialogueAudioInfoSO>();
        audioInfoDictionary.Add(defaultAudioInfo.id, defaultAudioInfo);
        foreach (DialogueAudioInfoSO audioInfo in audioInfos)
        {
-        audioInfoDictionary.Add(audioInfo.id,audioInfo);
+            audioInfoDictionary.Add(audioInfo.id,audioInfo);
        }     
     }
     
@@ -86,11 +88,11 @@ public class DialogueManager : MonoBehaviour
         audioInfoDictionary.TryGetValue(id, out audioInfo);
         if(audioInfo != null)
         {
-          this.currentAudioInfo = audioInfo; // sets current audio info to the audio info pulled out of the dictionary
+            this.currentAudioInfo = audioInfo; // sets current audio info to the audio info pulled out of the dictionary
         }
         else
         {
-         Debug.LogWarning("Failed to find audio info for id:" + id);
+            Debug.LogWarning("Failed to find audio info for id:" + id);
         }
     }
     private void Update()
@@ -109,15 +111,23 @@ public class DialogueManager : MonoBehaviour
 
     public void EnterStoryChoice(int index)
     {
-
+        List<Choice> choices = currentStory.currentChoices;
+        Debug.Log("Number of choices: " + choices.Count);
         currentStory.ChooseChoiceIndex(index);
-        dialogueIsPlaying = true;
-        dialoguePanel.SetActive(true);
     }
 
     public void EnterDialogueMode(TextAsset inkJSON)
     {
         currentStory = new Story(inkJSON.text); // dialogue will show the inkJSON
+        dialogueIsPlaying = true;
+        dialoguePanel.SetActive(true);
+
+        ContinueStory();
+    }
+
+    public void EnterDialogueMode(Story story)
+    {
+        currentStory = story; // dialogue will show the inkJSON
         dialogueIsPlaying = true;
         dialoguePanel.SetActive(true);
 

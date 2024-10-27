@@ -5,6 +5,7 @@ using UnityEngine;
 public class CharacterInfoHandler
 {
     private int murdererId;
+    private int victimId;
     private List<CharacterInfo> m_characterInfo;
 
     public CharacterInfoHandler()
@@ -12,7 +13,7 @@ public class CharacterInfoHandler
         m_characterInfo = new List<CharacterInfo>();
     }
 
-    public void Initialise(string seed)
+    public void Initialise(string seed, TextAsset npcStory)
     {
         //Create a file reader
         StreamReader sr = new StreamReader("./Assets/FileData/CharacterInfo.txt");
@@ -21,7 +22,7 @@ public class CharacterInfoHandler
         for (int i = 0; i < 8; i++)
         {
             Debug.Log("Current string partition: " + seed.Substring(i * 8, 8));
-            m_characterInfo.Add(new CharacterInfo(sr.ReadLine(), seed.Substring(i * 8, 8), i));
+            m_characterInfo.Add(new CharacterInfo(sr.ReadLine(), seed.Substring(i * 8, 8), i, npcStory));
         }
 
         //Set character relations to be the highest between each pair of generated 'relation levels'
@@ -58,14 +59,47 @@ public class CharacterInfoHandler
         return toReturn;
     }
 
-    public void AssignMurderer(int id)
+    public void AssignVictim(int id)
     {
-        m_characterInfo[id].SetMurderer(true);
-        murdererId = id;
+        m_characterInfo[id].SetVictim(true);
+        victimId = id;
+
+        int lowest = 6;
+        int potMur = -1;
+        for(int i = 0; i < 8; i++)
+        {
+            int relation = m_characterInfo[id].GetRelationWith(i);
+            if(relation < lowest)
+            {
+                lowest = relation;
+                potMur = i;
+            }
+        }
+
+        m_characterInfo[potMur].SetMurderer(true);
+        murdererId = potMur;
+    }
+
+    public CharacterInfo GetInfo(string name)
+    {
+        for(int i = 0; i < m_characterInfo.Count; i++)
+        {
+            if(name == m_characterInfo[i].Name())
+            {
+                return m_characterInfo[i];
+            }
+        }
+
+        return null;
     }
 
     public CharacterInfo GetMurderer()
     {
         return m_characterInfo[murdererId];
+    }
+
+    public CharacterInfo GetVictim()
+    {
+        return m_characterInfo[victimId];
     }
 }

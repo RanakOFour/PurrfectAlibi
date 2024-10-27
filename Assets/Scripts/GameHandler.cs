@@ -1,3 +1,4 @@
+using Ink.Runtime;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -12,7 +13,8 @@ public class GameHandler : MonoBehaviour
     private CharacterInfoHandler m_characterInfo;
     private Dictionary<string, Clue> m_KnownClues;
     private LocationHandler m_LocationHandler;
-    [SerializeField] TextAsset inkJSON;
+    [SerializeField] TextAsset IntroductionText;
+    [SerializeField] TextAsset NPCText;
 
     private void Awake()
     {
@@ -37,20 +39,22 @@ public class GameHandler : MonoBehaviour
         //Pass seed into character info handler
         strSeed = strSeed.Substring(0, 64);
         m_characterInfo = new CharacterInfoHandler();
-        m_characterInfo.Initialise(strSeed);
+        m_characterInfo.Initialise(strSeed, NPCText);
 
         //Get a random char from the seed and that digit mod 7 is the murderer
-        int murderer = int.Parse(strSeed[Mathf.RoundToInt(UnityEngine.Random.Range(0, 63))].ToString()) % 7;
-        m_characterInfo.AssignMurderer(murderer);
+        int victim = int.Parse(strSeed[Mathf.RoundToInt(UnityEngine.Random.Range(0, 63))].ToString()) % 7;
+        m_characterInfo.AssignVictim(victim);
 
         int murderLocation = m_characterInfo.GetMurderer().GetCurrentHangout(2);
         Clue murderClue = new Clue("A murder took place near Location " + murderLocation.ToString() + " on the night of the 22nd.");
 
         SceneManager.LoadScene("MainMap");
 
+        Story introduction = new Story(IntroductionText.text);
+        introduction.variablesState["murderLocation"] = (murderLocation + 1).ToString();
+
         DialogueManager dm = DialogueManager.GetInstance();
-        dm.EnterDialogueMode(inkJSON);
-        dm.EnterStoryChoice(murderLocation + 1);
+        dm.EnterDialogueMode(introduction);
     }
 
     public void MoveScene(int _roomId)
@@ -92,5 +96,10 @@ public class GameHandler : MonoBehaviour
     public int GetRoom()
     {
         return m_currentRoom;
+    }
+
+    public CharacterInfo GetInfo(string character)
+    {
+        return m_characterInfo.GetInfo(character);
     }
 }

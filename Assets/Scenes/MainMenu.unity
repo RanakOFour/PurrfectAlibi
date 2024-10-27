@@ -387,7 +387,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Vidja Game
+  m_text: Start
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -948,9 +948,13 @@ MonoBehaviour:
   dialoguePanel: {fileID: 930465062}
   dialogueText: {fileID: 944782483}
   displayNameText: {fileID: 1661834491}
-  portraitAnimation: {fileID: 0}
-  dialogueTypingSoundclip: {fileID: 0}
-  stopAudioSource: 0
+  portraitAnimation: {fileID: 2044422021}
+  defaultAudioInfo: {fileID: 11400000, guid: 9aa16a089ba0e8e42975648357ee159e, type: 2}
+  audioInfos:
+  - {fileID: 11400000, guid: ab006fd323e8b874294446e35d98cd91, type: 2}
+  - {fileID: 11400000, guid: f59234b0b487f73468b171106b65bf60, type: 2}
+  - {fileID: 11400000, guid: 2d2add2c5e530fe448490029f36876f2, type: 2}
+  - {fileID: 11400000, guid: 6dacbbb24ddb9f04786a98ba597a1dc6, type: 2}
 --- !u!1 &930465062
 GameObject:
   m_ObjectHideFlags: 0
@@ -962,6 +966,7 @@ GameObject:
   - component: {fileID: 930465065}
   - component: {fileID: 930465064}
   - component: {fileID: 930465063}
+  - component: {fileID: 930465066}
   m_Layer: 5
   m_Name: dialoguePanel
   m_TagString: Untagged
@@ -1029,6 +1034,27 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: -10}
   m_SizeDelta: {x: 750, y: 350}
   m_Pivot: {x: 0.5, y: 1}
+--- !u!95 &930465066
+Animator:
+  serializedVersion: 5
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 930465062}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 1e405560fe9bd7941a8ecf417ee6c8e3, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
 --- !u!1 &944782482
 GameObject:
   m_ObjectHideFlags: 0
@@ -2323,7 +2349,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6961f2325e7db474f80eed5f43df56ba, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  inkJSON: {fileID: 4900000, guid: a2ebb04ecc01bef4496a0a3b8c528a03, type: 3}
+  IntroductionText: {fileID: 4900000, guid: a2ebb04ecc01bef4496a0a3b8c528a03, type: 3}
+  NPCText: {fileID: 4900000, guid: db040d7b306f8004c9eead3bda606f1d, type: 3}
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0

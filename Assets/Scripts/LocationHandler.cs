@@ -17,13 +17,24 @@ public class LocationHandler : MonoBehaviour
 
     public void SetupScene(List<int> characters)
     {
-        for(int i = 0; i < characters.Count; i++)
+        for (int i = 0; i < characters.Count; i++)
         {
             if (!characters.Contains(i))
             {
                 m_characters[i].SetActive(false);
             }
-                
+
         }
+    }
+
+    public int GetId(string name)
+    {
+        for (int i = 0; i < m_characters.Count; i++)
+        {
+            if (m_characters[i].name == name)
+            { return i; }
+        }
+
+        return -1;
     }
 }

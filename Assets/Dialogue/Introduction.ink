@@ -1,29 +1,14 @@
+VAR victim = ""
+VAR murderLocation = ""
 -> Introduction
-
-
-
-
-
-
 
 == Introduction ==
 Current date: 23/8
-Fluffy, we have a new case! #speaker: Assistant #portrait: Assistant_default #Layout:Right
-What have you got for me? #speaker:Fluffy #portrait:Fluffy_Default #Layout:Left
-
-*   [murderat0]
-    There's been a murder near "Location 1"#speaker: Assistant #portrait: Assistant_default #Layout:Right -> CONT
-*   [murderat1]
-    There's been a murder near "Location 2"#speaker: Assistant #portrait: Assistant_default #Layout:Right -> CONT
-*   [murderat2]
-    There's been a murder near "Location 3"#speaker: Assistant #portrait: Assistant_default #Layout:Right -> CONT
-*   [murderat3]
-    There's been a murder near "Location 4"#speaker: Assistant #portrait: Assistant_default #Layout:Right -> CONT
-*   [murderat4]
-    There's been a murder near "Location 5"#speaker: Assistant #portrait: Assistant_default #Layout:Right -> CONT
-
-= CONT
-I'll go see what I can find... #speaker:Fluffy #portrait:Fluffy_Default #Layout:Left -> DONE
+Fluffy, we have a new case! #speaker: Assistant #portrait:Assistant_default #layout:Right
+What have you got for me? #speaker:Fluffy #portrait:Fluffy_Normal #layout:Left
+Last night, {victim} was murdered near "Location {murderLocation}"!#speaker: Assistant #portrait:Assistant_default #layout:Right
+Alright, I'll go see what I can find... #speaker:Fluffy #portrait:Fluffy_Normal #layout:Left
+-> DONE
 
 == Tutorial ==
 Today is the 27/8, and if we don't find the killer by the end of the week, it's no paycheck for us! #speaker: Assistant #portrait: Assistant_default #Layout:Right
