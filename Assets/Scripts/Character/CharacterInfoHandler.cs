@@ -19,16 +19,16 @@ public class CharacterInfoHandler
         StreamReader sr = new StreamReader("./Assets/FileData/CharacterInfo.txt");
 
         //Fill in character relations & appearance patterns
-        for (int i = 0; i < 8; i++)
+        for (int i = 0; i < 7; i++)
         {
             Debug.Log("Current string partition: " + seed.Substring(i * 8, 8));
             m_characterInfo.Add(new CharacterInfo(sr.ReadLine(), seed.Substring(i * 8, 8), i, npcStory));
         }
 
         //Set character relations to be the highest between each pair of generated 'relation levels'
-        for (int i = 0; i < 8; i++)
+        for (int i = 0; i < 7; i++)
         {
-            for (int j = i; j < 8; j++)
+            for (int j = i; j < 7; j++)
             {
                 if (m_characterInfo[i].GetRelationWith(j) > m_characterInfo[j].GetRelationWith(i))
                 {
@@ -66,7 +66,7 @@ public class CharacterInfoHandler
 
         int lowest = 6;
         int potMur = -1;
-        for(int i = 0; i < 8; i++)
+        for(int i = 0; i < 7; i++)
         {
             int relation = m_characterInfo[id].GetRelationWith(i);
             if(relation < lowest)

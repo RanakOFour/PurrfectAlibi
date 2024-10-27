@@ -945,7 +945,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   typingSpeed: 0.04
-  dialoguePanel: {fileID: 0}
+  dialoguePanel: {fileID: 930465062}
   dialogueText: {fileID: 0}
   displayNameText: {fileID: 1661834491}
   portraitAnimation: {fileID: 2044422021}

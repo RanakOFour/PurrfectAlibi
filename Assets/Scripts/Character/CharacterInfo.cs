@@ -70,9 +70,7 @@ public class CharacterInfo
         { return m_story; }
 
     public int GetId()
-    {
-        return m_id;
-    }
+    { return m_id; }
 
     public bool IsVictim()
     { return m_isVictim; }
@@ -107,9 +105,9 @@ public class CharacterInfo
         m_characterRelations[character] = relation;
     }
 
-        public void SetAlibi(Clue alibi)
+    public void SetAlibi(Clue alibi)
     {
-        m_alibi = alibi;
+       m_alibi = alibi;
     }
 
     public Clue GetAlibi()

@@ -709,12 +709,12 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Sprite
       value: 
-      objectReference: {fileID: 21300000, guid: 968d872f150a5804e861ca3897bfe779,
+      objectReference: {fileID: 21300000, guid: 25febc094f15997468b830e073dcb80a,
         type: 3}
     - target: {fileID: 6190736501661221235, guid: 356d4b2a25b43564489782d2a27b539b,
         type: 3}
       propertyPath: m_Name
-      value: Squirrel
+      value: Squeek
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -845,86 +845,6 @@ MonoBehaviour:
   m_LightCookieSize: {x: 1, y: 1}
   m_LightCookieOffset: {x: 0, y: 0}
   m_SoftShadowQuality: 0
---- !u!1001 &970056688
-PrefabInstance:
-  m_ObjectHideFlags: 0
-  serializedVersion: 2
-  m_Modification:
-    serializedVersion: 3
-    m_TransformParent: {fileID: 1920813857}
-    m_Modifications:
-    - target: {fileID: 4785899661942683701, guid: 356d4b2a25b43564489782d2a27b539b,
-        type: 3}
-      propertyPath: m_LocalPosition.x
-      value: -124.977615
-      objectReference: {fileID: 0}
-    - target: {fileID: 4785899661942683701, guid: 356d4b2a25b43564489782d2a27b539b,
-        type: 3}
-      propertyPath: m_LocalPosition.y
-      value: 85.5
-      objectReference: {fileID: 0}
-    - target: {fileID: 4785899661942683701, guid: 356d4b2a25b43564489782d2a27b539b,
-        type: 3}
-      propertyPath: m_LocalPosition.z
-      value: -397.37457
-      objectReference: {fileID: 0}
-    - target: {fileID: 4785899661942683701, guid: 356d4b2a25b43564489782d2a27b539b,
-        type: 3}
-      propertyPath: m_LocalRotation.w
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 4785899661942683701, guid: 356d4b2a25b43564489782d2a27b539b,
-        type: 3}
-      propertyPath: m_LocalRotation.x
-      value: -0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4785899661942683701, guid: 356d4b2a25b43564489782d2a27b539b,
-        type: 3}
-      propertyPath: m_LocalRotation.y
-      value: -0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4785899661942683701, guid: 356d4b2a25b43564489782d2a27b539b,
-        type: 3}
-      propertyPath: m_LocalRotation.z
-      value: -0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4785899661942683701, guid: 356d4b2a25b43564489782d2a27b539b,
-        type: 3}
-      propertyPath: m_LocalEulerAnglesHint.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4785899661942683701, guid: 356d4b2a25b43564489782d2a27b539b,
-        type: 3}
-      propertyPath: m_LocalEulerAnglesHint.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4785899661942683701, guid: 356d4b2a25b43564489782d2a27b539b,
-        type: 3}
-      propertyPath: m_LocalEulerAnglesHint.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 5087432287241643120, guid: 356d4b2a25b43564489782d2a27b539b,
-        type: 3}
-      propertyPath: m_Sprite
-      value: 
-      objectReference: {fileID: 21300000, guid: 040f826b45506e84d882065d0919fc6b,
-        type: 3}
-    - target: {fileID: 6190736501661221235, guid: 356d4b2a25b43564489782d2a27b539b,
-        type: 3}
-      propertyPath: m_Name
-      value: Shark
-      objectReference: {fileID: 0}
-    m_RemovedComponents: []
-    m_RemovedGameObjects: []
-    m_AddedGameObjects: []
-    m_AddedComponents: []
-  m_SourcePrefab: {fileID: 100100000, guid: 356d4b2a25b43564489782d2a27b539b, type: 3}
---- !u!4 &970056689 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 4785899661942683701, guid: 356d4b2a25b43564489782d2a27b539b,
-    type: 3}
-  m_PrefabInstance: {fileID: 970056688}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1271359742
 GameObject:
   m_ObjectHideFlags: 0
@@ -1156,12 +1076,12 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Sprite
       value: 
-      objectReference: {fileID: 21300000, guid: 3ed7276fc92bcd44395fbff93a62835d,
+      objectReference: {fileID: 21300000, guid: 712d27964e4b10543bcd11fcf7ba42c2,
         type: 3}
     - target: {fileID: 6190736501661221235, guid: 356d4b2a25b43564489782d2a27b539b,
         type: 3}
       propertyPath: m_Name
-      value: Turkey
+      value: Tina
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -1331,12 +1251,12 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Sprite
       value: 
-      objectReference: {fileID: 21300000, guid: 968d872f150a5804e861ca3897bfe779,
+      objectReference: {fileID: 21300000, guid: d212008f62368b04f850957ee69e6720,
         type: 3}
     - target: {fileID: 6190736501661221235, guid: 356d4b2a25b43564489782d2a27b539b,
         type: 3}
       propertyPath: m_Name
-      value: Bunny
+      value: Biffy
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -1592,12 +1512,12 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Sprite
       value: 
-      objectReference: {fileID: 21300000, guid: 968d872f150a5804e861ca3897bfe779,
+      objectReference: {fileID: 21300000, guid: 38061dfccbc10b64281a974cab91d834,
         type: 3}
     - target: {fileID: 6190736501661221235, guid: 356d4b2a25b43564489782d2a27b539b,
         type: 3}
       propertyPath: m_Name
-      value: Platypus
+      value: Petty
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -1640,7 +1560,6 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1312343350}
-  - {fileID: 970056689}
   - {fileID: 1298510514}
   - {fileID: 19344964}
   - {fileID: 1382334273}
