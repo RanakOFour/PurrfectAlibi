@@ -52,6 +52,7 @@ public class GameHandler : MonoBehaviour
 
         Story introduction = new Story(IntroductionText.text);
         introduction.variablesState["murderLocation"] = (murderLocation + 1).ToString();
+        introduction.variablesState["victim"] = m_characterInfo.GetVictim().Name();
 
         DialogueManager dm = DialogueManager.GetInstance();
         dm.EnterDialogueMode(introduction);
