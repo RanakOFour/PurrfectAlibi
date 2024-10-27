@@ -4,6 +4,7 @@ using UnityEngine;
 using TMPro;
 using Ink.Runtime;
 using UnityEngine.EventSystems;
+using System;
 //using UnityEditor.VisionOS;
 
 public class DialogueManager : MonoBehaviour
@@ -35,6 +36,10 @@ public class DialogueManager : MonoBehaviour
     private Coroutine displayLineCoroutine;
 
     private static DialogueManager instance;
+
+    public event Action OnDialogueStart;
+    public event Action OnDialogueEnd;
+
 
     private const string SPEAKER_TAG = "speaker"; //gets the speaker tag from the ink file which is used to set name
 
@@ -130,6 +135,9 @@ public class DialogueManager : MonoBehaviour
         dialogueIsPlaying = false;
         dialoguePanel.SetActive(false);
         dialogueText.text = "";
+
+        OnDialogueEnd?.Invoke();
+
         SetCurrentAudioInfo(defaultAudioInfo.id); // sets audio back to default
     }
 
@@ -182,9 +190,9 @@ public class DialogueManager : MonoBehaviour
             {
                 audioSource.Stop();
             }
-            int randomIndex = Random.Range(0, dialogueTypingSoundClips.Length); // 
+            int randomIndex = UnityEngine.Random.Range(0, dialogueTypingSoundClips.Length); // 
             AudioClip soundClip = dialogueTypingSoundClips[randomIndex]; // plays a random clip
-            audioSource.pitch = Random.Range(minPitch, maxPitch); // sets pitcg
+            audioSource.pitch = UnityEngine.Random.Range(minPitch, maxPitch); // sets pitcg
             audioSource.PlayOneShot(soundClip); // plays audio
         }
     }
