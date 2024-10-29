@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 73f3eaa452627b142840325bdb2e8943, type: 3}
   m_Name: Squeek
   m_EditorClassIdentifier: 
-  id: 
+  id: Squeek
   dialogueTypingSoundclips: []
   stopAudioSource: 0
   frequencyLevel: 2
