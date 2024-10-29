@@ -78,6 +78,11 @@ public class GameHandler : MonoBehaviour
         dm.EnterDialogueMode(introduction);
     }
 
+    public void quitGame()
+    {
+         Application.Quit();
+    }
+
     public void MoveScene(int _roomId)
     {
         m_currentRoom = _roomId;
