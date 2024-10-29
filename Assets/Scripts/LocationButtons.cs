@@ -21,8 +21,8 @@ public class LocationButtons : MonoBehaviour
         
         SetButtonsInteractable(false);
 
-        DialogueManager.GetInstance().OnDialogueStart += () => SetButtonsInteractable(false);
-        DialogueManager.GetInstance().OnDialogueEnd += () => SetButtonsInteractable(true);
+        DialogueManager.GetInstance().OnDialogueStart += () => SetButtonsInteractable(false); // sets button interaction to false when dialogue starts so you can't exit the mpa
+        DialogueManager.GetInstance().OnDialogueEnd += () => SetButtonsInteractable(true); // sets it back to true so buttons can be interacted with
     }
 
     private void SetButtonsInteractable(bool state)
