@@ -4303,6 +4303,11 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 1062186068}
     m_Modifications:
+    - target: {fileID: 4742305323049603361, guid: 97519691208413942a6ae7bc9e34d441,
+        type: 3}
+      propertyPath: m_PresetInfoIsWorld
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 4850117345299413122, guid: 97519691208413942a6ae7bc9e34d441,
         type: 3}
       propertyPath: m_Name
