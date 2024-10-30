@@ -11,7 +11,7 @@ public class LocationHandler : MonoBehaviour
     {
         m_characters = GameObject.FindGameObjectsWithTag("Character").ToList();
         Debug.Log("Characters: " + m_characters.Count);
-        GameHandler gameHandler = GameObject.FindGameObjectWithTag("GameController").GetComponent<GameHandler>();
+        GameController gameHandler = GameObject.FindGameObjectWithTag("GameController").GetComponent<GameController>();
         SetupScene(gameHandler.GetPresentCharacters());
     }
 

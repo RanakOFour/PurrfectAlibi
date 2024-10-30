@@ -15,7 +15,7 @@ public class DialogueTrigger : MonoBehaviour
 
     
     private bool playerInRange; //Checks if player is in range
-    private GameHandler gameHandler;
+    private GameController gameHandler;
 
     public void SetCharInfo(CharacterInfo charInfo)
     {
@@ -28,7 +28,7 @@ public class DialogueTrigger : MonoBehaviour
         // by default these are set to false so when you enter it later it becomes true
         playerInRange = false;
         visualCue.SetActive(false); 
-        gameHandler = GameObject.FindGameObjectWithTag("GameController").GetComponent<GameHandler>();
+        gameHandler = GameObject.FindGameObjectWithTag("GameController").GetComponent<GameController>();
     }
 
     private void Update()

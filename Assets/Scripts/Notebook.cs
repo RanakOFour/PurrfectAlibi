@@ -11,13 +11,10 @@ public class Notebook : MonoBehaviour
     [SerializeField] private GameObject m_NotebookImage;
     [SerializeField] private GameObject m_Notes;
     [SerializeField] private GameObject m_Network;
-    private GameHandler m_Handler;
     // Start is called before the first frame update
     void Start()
     {
         DontDestroyOnLoad(this);
-
-        m_Handler = GameObject.FindGameObjectWithTag("GameController").GetComponent<GameHandler>();
         // 7 characters with 4 clues each, plus 1 freebie at the start (at [8, 0])
         m_KnownClues = new string[8, 3];
         m_KnownRelations = new int[8];
@@ -67,7 +64,7 @@ public class Notebook : MonoBehaviour
 
     public void ShowNotes()
     {
-        if(!m_Notes.activeSelf)
+        if(!m_Notes.activeInHierarchy)
         {
             m_Network.SetActive(false);
             m_Notes.SetActive(true);
@@ -76,7 +73,7 @@ public class Notebook : MonoBehaviour
 
     public void ShowNetwork()
     {
-        if(!m_Network.activeSelf)
+        if(!m_Network.activeInHierarchy)
         {
             m_Notes.SetActive(false);
             m_Network.SetActive(true);

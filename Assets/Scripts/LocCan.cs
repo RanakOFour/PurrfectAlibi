@@ -5,12 +5,12 @@ using UnityEngine;
 
 public class LocCan : MonoBehaviour
 {
-    GameHandler gameHandler;
+    GameController gameHandler;
     [SerializeField] TextMeshProUGUI text;
     // Start is called before the first frame update
     void Start()
     {
-        gameHandler = GameObject.FindGameObjectWithTag("GameController").GetComponent<GameHandler>();
+        gameHandler = GameObject.FindGameObjectWithTag("GameController").GetComponent<GameController>();
         text.text = gameHandler.GetLocation();
     }
 

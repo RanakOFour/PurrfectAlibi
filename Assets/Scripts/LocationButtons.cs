@@ -5,12 +5,12 @@ using UnityEngine.UI;
 
 public class LocationButtons : MonoBehaviour
 {
-    private GameHandler m_gameHandler;
+    private GameController m_gameHandler;
     private GameObject[] m_buttons;
 
     void Start()
     {
-        m_gameHandler = GameObject.FindGameObjectWithTag("GameController").GetComponent<GameHandler>();
+        m_gameHandler = GameObject.FindGameObjectWithTag("GameController").GetComponent<GameController>();
         m_buttons = GameObject.FindGameObjectsWithTag("LocationButtons");
 
         m_buttons[0].GetComponent<Button>().onClick.AddListener(() => m_gameHandler.MoveScene(0));

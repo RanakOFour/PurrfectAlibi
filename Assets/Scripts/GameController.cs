@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-public class GameHandler : MonoBehaviour
+public class GameController : MonoBehaviour
 {
     public bool shouldAdvanceTime = false;
     private bool m_gameOver;
@@ -14,33 +14,12 @@ public class GameHandler : MonoBehaviour
     private DialogueManager dm;
     private Notebook m_Notebook;
     private LocationHandler m_LocationHandler;
-    [SerializeField] TextAsset IntroductionText;
-    [SerializeField] TextAsset NPCText;
+    [SerializeField] private TextAsset IntroductionText;
+    [SerializeField] private TextAsset NPCText;
 
-    private void Awake()
+    private void Start()
     {
         DontDestroyOnLoad(gameObject);
-    }
-
-    private void Update()
-    {
-       if(shouldAdvanceTime && !dm.dialogueIsPlaying)
-       {
-            AdvanceTime();
-
-            if(m_gameOver)
-            {
-                MoveScene(-2);
-            }
-            else
-            {
-                MoveScene(-1);
-            }
-       }
-    }
-
-    public void StartNewGame()
-    {
         m_currentRoom = -1;
         m_dayPart = 0;
         m_currentDay = 23;
@@ -49,7 +28,7 @@ public class GameHandler : MonoBehaviour
 
         //Gets seed as a long number that I can easily scan through digits with
         string strSeed = "";
-        while(strSeed.Length < 64)
+        while (strSeed.Length < 64)
         {
             //Substring cuts out the '0.' at the beginning
             strSeed += UnityEngine.Random.value.ToString().Substring(2);
@@ -68,7 +47,6 @@ public class GameHandler : MonoBehaviour
 
         m_Notebook.AddClue(7, initMurderInfo);
         m_Notebook.AddClue(m_characterInfo.GetVictim().GetId(), "Died at Location " + (murderLocation + 1).ToString());
-        SceneManager.LoadScene("MainMap");
 
         Story introduction = new Story(IntroductionText.text);
         introduction.variablesState["murderLocation"] = (murderLocation + 1).ToString();
@@ -76,6 +54,23 @@ public class GameHandler : MonoBehaviour
 
         dm = DialogueManager.GetInstance();
         dm.EnterDialogueMode(introduction);
+    }
+
+    private void Update()
+    {
+       if(shouldAdvanceTime && !dm.dialogueIsPlaying)
+       {
+            AdvanceTime();
+
+            if(m_gameOver)
+            {
+                MoveScene(-2);
+            }
+            else
+            {
+                MoveScene(-1);
+            }
+       }
     }
 
     public void MoveScene(int _roomId)

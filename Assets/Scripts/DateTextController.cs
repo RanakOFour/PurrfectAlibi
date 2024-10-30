@@ -11,7 +11,7 @@ public class DateTextController : MonoBehaviour
     {
         dateText = GetComponent<TextMeshProUGUI>();
         dayPartText = GameObject.FindGameObjectWithTag("TimeOfDay").GetComponent<TextMeshProUGUI>();
-        GameHandler gameHandler = GameObject.FindGameObjectWithTag("GameController").GetComponent<GameHandler>();
+        GameController gameHandler = GameObject.FindGameObjectWithTag("GameController").GetComponent<GameController>();
         ShowTime(gameHandler.GetDate(), gameHandler.GetTimeOfDay());
     }
 

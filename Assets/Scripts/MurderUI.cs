@@ -6,7 +6,7 @@ using UnityEngine;
 
 public class MurderUI : MonoBehaviour
 {
-    GameHandler gameHandler;
+    GameController gameHandler;
     TextMeshProUGUI[] buttons;
     [SerializeField] private TextMeshProUGUI topText;
     [SerializeField] private GameObject loseText;
@@ -15,7 +15,7 @@ public class MurderUI : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        gameHandler = GameObject.FindGameObjectWithTag("GameController").GetComponent<GameHandler>();
+        gameHandler = GameObject.FindGameObjectWithTag("GameController").GetComponent<GameController>();
         buttons = gameObject.GetComponentsInChildren<TextMeshProUGUI>();
         string victimName = gameHandler.GetVictim();
 

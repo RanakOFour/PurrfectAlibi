@@ -12,6 +12,7 @@ public class DialogueManager : MonoBehaviour
 
     [Header("Params")]
     [SerializeField] private float typingSpeed = 0.04f; // speed changes the speed of the typing the lower the number the faster it types
+
     //Dialogue box 
     //canvas dialogue box
     [Header("Dialogue UI")]
