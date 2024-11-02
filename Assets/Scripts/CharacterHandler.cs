@@ -1,26 +1,26 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class CharacterHandler : MonoBehaviour
 {
-    private GameController gameHandler;
-    private GameObject sprite;
-    private DialogueTrigger trigger;
-    private CharacterInfo characterInfo;
+    [Header("Character ID")]
+    [SerializeField] private int m_id;
 
-    // Start is called before the first frame update
+
+    private GameController m_gameController;
+    private GameObject m_sprite;
+    private DialogueTrigger m_trigger;
+    private CharacterInfo m_characterInfo;
+
+
     void Start()
     {
-        gameHandler = GameObject.FindGameObjectWithTag("GameController").GetComponent<GameController>();
-        trigger = GetComponentInChildren<DialogueTrigger>();
+        // What to do? Get charInfo, if hangout (currentTime) is at point, don't set disable
 
-        //It is 3:19 am, my washing will be done in 9 minutes
-        // tl;dr - gets character info
-        Debug.Log("Searching for: " + gameObject.name);
-        characterInfo = gameHandler.GetInfo(gameObject.name);
+        m_gameController = GameObject.FindGameObjectWithTag("GameController").GetComponent<GameController>();
+        m_characterInfo = m_gameController.GetCharInfo(m_id);
 
-        trigger.GetComponent<DialogueTrigger>().charStory = characterInfo.Story();
-        trigger.GetComponent<DialogueTrigger>().SetCharInfo(characterInfo);
+        m_trigger = GetComponentInChildren<DialogueTrigger>();
+        m_trigger.GetComponent<DialogueTrigger>().m_charStory = m_characterInfo.Story();
+        //m_trigger.GetComponent<DialogueTrigger>().SetCharInfo(m_characterInfo);
     }
 }

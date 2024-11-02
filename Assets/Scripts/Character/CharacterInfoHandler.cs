@@ -4,8 +4,8 @@ using UnityEngine;
 
 public class CharacterInfoHandler
 {
-    private int murdererId;
-    private int victimId;
+    private int m_murdererId;
+    private int m_victimId;
     private List<CharacterInfo> m_characterInfo;
 
     public CharacterInfoHandler()
@@ -13,7 +13,7 @@ public class CharacterInfoHandler
         m_characterInfo = new List<CharacterInfo>();
     }
 
-    public void Initialise(string seed, TextAsset npcStory)
+    public void Initialise(string _seed, TextAsset _npcStory)
     {
         //Create a file reader
         StreamReader sr = new StreamReader("./Assets/FileData/CharacterInfo.txt");
@@ -21,8 +21,8 @@ public class CharacterInfoHandler
         //Fill in character relations & appearance patterns
         for (int i = 0; i < 7; i++)
         {
-            Debug.Log("Current string partition: " + seed.Substring(i * 8, 8));
-            m_characterInfo.Add(new CharacterInfo(sr.ReadLine(), seed.Substring(i * 8, 8), i, npcStory));
+            Debug.Log("Current string partition: " + _seed.Substring(i * 8, 8));
+            m_characterInfo.Add(new CharacterInfo(sr.ReadLine(), _seed.Substring(i * 8, 8), i, _npcStory));
         }
 
         //Set character relations to be the highest between each pair of generated 'relation levels'
@@ -45,12 +45,12 @@ public class CharacterInfoHandler
         // Deciding the murderer (happened previous evening near (but not at) location X
     }
 
-    public List<int> GetCharactersAtLocation(int roomId, int time)
+    public List<int> GetCharactersAtLocation(int _roomId, int _time)
     {
         List<int> toReturn = new List<int>();
         foreach(CharacterInfo ci in m_characterInfo)
         {
-            if(ci.GetCurrentHangout(time) == roomId)
+            if(ci.GetCurrentHangout(_time) == _roomId)
             {
                 toReturn.Add(ci.GetId());
             }
@@ -59,16 +59,16 @@ public class CharacterInfoHandler
         return toReturn;
     }
 
-    public void AssignVictim(int id)
+    public void AssignVictim(int _id)
     {
-        m_characterInfo[id].SetVictim(true);
-        victimId = id;
+        m_characterInfo[_id].SetVictim(true);
+        m_victimId = _id;
 
         int lowest = 6;
         int potMur = -1;
         for(int i = 0; i < 7; i++)
         {
-            int relation = m_characterInfo[id].GetRelationWith(i);
+            int relation = m_characterInfo[_id].GetRelationWith(i);
             if(relation < lowest)
             {
                 lowest = relation;
@@ -77,21 +77,21 @@ public class CharacterInfoHandler
         }
 
         m_characterInfo[potMur].SetMurderer(true);
-        murdererId = potMur;
+        m_murdererId = potMur;
 
-        Debug.Log("Victim: " + m_characterInfo[victimId].Name() + "\nMurderer: " + m_characterInfo[murdererId].Name());
+        Debug.Log("Victim: " + m_characterInfo[m_victimId].Name() + "\nMurderer: " + m_characterInfo[m_murdererId].Name());
 
         foreach(CharacterInfo ci in m_characterInfo)
         {
-            ci.SetRelationClue(victimId);
+            ci.SetRelationClue(m_victimId);
         }
     }
 
-    public CharacterInfo GetInfo(string name)
+    public CharacterInfo GetInfo(string _characterName)
     {
         for(int i = 0; i < m_characterInfo.Count; i++)
         {
-            if(name == m_characterInfo[i].Name())
+            if(_characterName == m_characterInfo[i].Name())
             {
                 return m_characterInfo[i];
             }
@@ -100,13 +100,18 @@ public class CharacterInfoHandler
         return null;
     }
 
+    public CharacterInfo GetInfo(int _charId)
+    {
+        return m_characterInfo[_charId];
+    }
+
     public CharacterInfo GetMurderer()
     {
-        return m_characterInfo[murdererId];
+        return m_characterInfo[m_murdererId];
     }
 
     public CharacterInfo GetVictim()
     {
-        return m_characterInfo[victimId];
+        return m_characterInfo[m_victimId];
     }
 }

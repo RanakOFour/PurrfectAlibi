@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -13,6 +11,7 @@ public class LocationButtons : MonoBehaviour
         m_gameHandler = GameObject.FindGameObjectWithTag("GameController").GetComponent<GameController>();
         m_buttons = GameObject.FindGameObjectsWithTag("LocationButtons");
 
+        // GameHandler indexes are weird because of how GameObject.FindGameObjectsWithTag() grabs children in gameObjects
         m_buttons[0].GetComponent<Button>().onClick.AddListener(() => m_gameHandler.MoveScene(0));
         m_buttons[1].GetComponent<Button>().onClick.AddListener(() => m_gameHandler.MoveScene(4));
         m_buttons[2].GetComponent<Button>().onClick.AddListener(() => m_gameHandler.MoveScene(1));

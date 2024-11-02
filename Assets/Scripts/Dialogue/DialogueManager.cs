@@ -5,106 +5,83 @@ using TMPro;
 using Ink.Runtime;
 using UnityEngine.EventSystems;
 using System;
-//using UnityEditor.VisionOS;
 
 public class DialogueManager : MonoBehaviour
 {
+    [Header("Typing Speed")]
+    [SerializeField] private float m_typingSpeed = 0.04f; // speed changes the speed of the typing the lower the number the faster it types
 
-    [Header("Params")]
-    [SerializeField] private float typingSpeed = 0.04f; // speed changes the speed of the typing the lower the number the faster it types
-
-    //Dialogue box 
-    //canvas dialogue box
     [Header("Dialogue UI")]
-    [SerializeField] private GameObject dialoguePanel; 
-    [SerializeField] private TextMeshProUGUI dialogueText;
-    [SerializeField] private TextMeshProUGUI displayNameText;
-    [SerializeField] private Animator portraitAnimation;
+    [SerializeField] private GameObject m_dialoguePanel;
 
-    //Audio stuff
+    [Header("Dialogue Text")]
+    [SerializeField] private TextMeshProUGUI m_dialogueText;
+
+    [Header("Display Name")]
+    [SerializeField] private TextMeshProUGUI m_displayNameText;
+
+    [Header("Portrait Animation")]
+    [SerializeField] private Animator m_portraitAnimation;
+
     [Header("Audio")]
-    [SerializeField] private DialogueAudioInfoSO defaultAudioInfo;
-    [SerializeField] private DialogueAudioInfoSO[] audioInfos;
-    private DialogueAudioInfoSO currentAudioInfo;
-    private Dictionary<string,  DialogueAudioInfoSO> audioInfoDictionary;
+    [SerializeField] private DialogueAudioInfoSO m_defaultAudioInfo;
 
-    private AudioSource audioSource;
-
-    private Animator layoutAnimator;
-    private Story currentStory;
-    public bool dialogueIsPlaying{get; private set; }
-
-    private Coroutine displayLineCoroutine;
-
-    private static DialogueManager instance;
+    [Header("Audio Infos")]
+    [SerializeField] private DialogueAudioInfoSO[] m_audioInfos;
 
     public event Action OnDialogueStart;
     public event Action OnDialogueEnd;
 
+    public bool m_dialogueIsPlaying { get; private set; }
+    private DialogueAudioInfoSO m_currentAudioInfo;
+    private Dictionary<string,  DialogueAudioInfoSO> m_audioInfoDictionary;
+    private AudioSource m_audioSource;
+    private Animator m_layoutAnimator;
+    private Story m_currentStory;
+    private Coroutine m_displayLineCoroutine;
+    private static DialogueManager m_instance;
 
-    private const string SPEAKER_TAG = "speaker"; //gets the speaker tag from the ink file which is used to set name
-
-    private const string PORTRAIT_TAG = "portrait"; //gets the portrait tag from the ink file which is used to set portrait
-
-    private const string LAYOUT_TAG = "layout"; //gets the layout tag from the ink file which is used to set if its on the right or left side
-
-    private const string AUDIO_TAG = "audio"; //gets the Audio tag from the ink file which is used to set the audio
+    private const string SPEAKER_TAG = "speaker";
+    private const string PORTRAIT_TAG = "portrait";
+    private const string LAYOUT_TAG = "layout";
+    private const string AUDIO_TAG = "audio";
 
     private void Awake()
     {
-        if (instance != null)
+        if (m_instance != null)
         {
             Debug.LogWarning("Found more than one dialogue manager in the scene");
         }
-        instance = this;
+        m_instance = this;
 
-        audioSource = this.gameObject.AddComponent<AudioSource>();
-        currentAudioInfo = defaultAudioInfo; //currentAudiInfo = info from Dialogue Audio
-    }
-
-    public static DialogueManager GetInstance()
-    {
-        return instance;
+        m_audioSource = this.gameObject.AddComponent<AudioSource>();
+        m_currentAudioInfo = m_defaultAudioInfo;
     }
 
     private void Start()
     {
-        dialogueIsPlaying = false;
-        dialoguePanel.SetActive(false);
+        m_dialogueIsPlaying = false;
+        m_dialoguePanel.SetActive(false);
 
-        layoutAnimator = dialoguePanel.GetComponent<Animator>();
+        m_layoutAnimator = m_dialoguePanel.GetComponent<Animator>();
 
-        InitializeAudioInfoDictionary(); // initialised the audioinfo dictionary at the start
+        InitializeAudioInfoDictionary();
     }
 
     private void InitializeAudioInfoDictionary()
     {
-       audioInfoDictionary = new Dictionary<string, DialogueAudioInfoSO>();
-       audioInfoDictionary.Add(defaultAudioInfo.id, defaultAudioInfo);
-       foreach (DialogueAudioInfoSO audioInfo in audioInfos)
+        m_audioInfoDictionary = new Dictionary<string, DialogueAudioInfoSO>();
+        m_audioInfoDictionary.Add(m_defaultAudioInfo.m_id, m_defaultAudioInfo);
+       foreach (DialogueAudioInfoSO audioInfo in m_audioInfos)
        {
-            audioInfoDictionary.Add(audioInfo.id,audioInfo);
+            m_audioInfoDictionary.Add(audioInfo.m_id,audioInfo);
        }     
     }
     
-    //sets the current audio info giving it an id
-    private void SetCurrentAudioInfo(string id)
-    {
-        DialogueAudioInfoSO audioInfo = null;
-        audioInfoDictionary.TryGetValue(id, out audioInfo);
-        if(audioInfo != null)
-        {
-            this.currentAudioInfo = audioInfo; // sets current audio info to the audio info pulled out of the dictionary
-        }
-        else
-        {
-            Debug.LogWarning("Failed to find audio info for id:" + id);
-        }
-    }
     private void Update()
     {
         //return if dialoge isn't playing
-        if (!dialogueIsPlaying)
+        if (!m_dialogueIsPlaying)
         {
             return;
         }
@@ -115,46 +92,69 @@ public class DialogueManager : MonoBehaviour
         }
     }
 
-    public void EnterStoryChoice(int index)
+    // Sets the current audio info giving it an id
+    private void SetCurrentAudioInfo(string _id)
     {
-        List<Choice> choices = currentStory.currentChoices;
-        Debug.Log("Number of choices: " + choices.Count);
-        currentStory.ChooseChoiceIndex(index);
+        DialogueAudioInfoSO audioInfo = null;
+        m_audioInfoDictionary.TryGetValue(_id, out audioInfo);
+        if (audioInfo != null)
+        {
+            this.m_currentAudioInfo = audioInfo; // Sets current audio info to the audio info pulled out of the dictionary
+        }
+        else
+        {
+            Debug.LogWarning("Failed to find audio info for id:" + _id);
+        }
     }
 
-    public void EnterDialogueMode(Story story)
+    public static DialogueManager GetInstance()
     {
-        currentStory = story; // dialogue will show the inkJSON
-        dialogueIsPlaying = true;
-        dialoguePanel.SetActive(true);
+        return m_instance;
+    }
+
+    public void EnterStoryChoice(int _index)
+    {
+        List<Choice> choices = m_currentStory.currentChoices;
+        Debug.Log("Number of choices: " + choices.Count);
+        m_currentStory.ChooseChoiceIndex(_index);
+    }
+
+    public void EnterDialogueMode(Story _story)
+    {
+        // Dialoguebox will show the inkJSON
+        m_currentStory = _story;
+        m_dialogueIsPlaying = true;
+        m_dialoguePanel.SetActive(true);
 
         ContinueStory();
     }
 
     private void ExitDialogueMode()
     {
-        dialogueIsPlaying = false;
-        dialoguePanel.SetActive(false);
-        dialogueText.text = "";
+        m_dialogueIsPlaying = false;
+        m_dialoguePanel.SetActive(false);
+        m_dialogueText.text = "";
 
-        OnDialogueEnd?.Invoke();
+        m_OnDialogueEnd?.Invoke();
 
-        SetCurrentAudioInfo(defaultAudioInfo.id); // sets audio back to default
+        SetCurrentAudioInfo(m_defaultAudioInfo.m_id);
     }
 
     private void ContinueStory()
     {
-        if (currentStory.canContinue)
+        if (m_currentStory.canContinue)
         {
-            // stops the issue where you press f during text and it mumbles the words
-            if(displayLineCoroutine != null)
+            // Stops the issue where you press f during text and it mumbles the words
+            if(m_displayLineCoroutine != null)
             {
-                StopCoroutine(displayLineCoroutine); //stops the coroutine so it doesn't affect the next one
+                StopCoroutine(m_displayLineCoroutine); // Stops the coroutine so it doesn't affect the next line
             }
-           string nextline = currentStory.Continue();
-           displayLineCoroutine = StartCoroutine(Displayline(nextline)); // The lines come in character by character
-           //Handletags
-           HandleTags(currentStory.currentTags);
+
+            string nextline = m_currentStory.Continue();
+            m_displayLineCoroutine = StartCoroutine(Displayline(nextline)); // The lines come in character by character
+
+           
+           HandleTags(m_currentStory.currentTags);
         }
         else
         {
@@ -162,73 +162,74 @@ public class DialogueManager : MonoBehaviour
         } 
     }
     
-    //TextDisplay Speed
-    private IEnumerator Displayline(string line)
+    // TextDisplay Speed
+    private IEnumerator Displayline(string _lineToDisplay)
     {
-        dialogueText.text = ""; //sets dialogue text to an empty string
+        m_dialogueText.text = "";
 
-        foreach (char letter in line.ToCharArray())
+        foreach (char letter in _lineToDisplay.ToCharArray())
         {
-            PlayDialogueSound(dialogueText.maxVisibleCharacters);
-            dialogueText.maxVisibleCharacters++;
-            dialogueText.text += letter;
-            yield return new WaitForSeconds(typingSpeed);
+            PlayDialogueSound(m_dialogueText.maxVisibleCharacters);
+            m_dialogueText.maxVisibleCharacters++;
+            m_dialogueText.text += letter;
+            yield return new WaitForSeconds(m_typingSpeed);
         }
     }
 
-    private void PlayDialogueSound(int currentDisplayedCharacterCount)
+    private void PlayDialogueSound(int _currentDisplayedCharacterCount)
     {
-        //Sets the variables to the currentaudioinfo versions
-        AudioClip[] dialogueTypingSoundClips = currentAudioInfo.dialogueTypingSoundclips;
-        int frequencyLevel = currentAudioInfo.frequencyLevel; 
-        float minPitch = currentAudioInfo.minPitch; 
-        float maxPitch = currentAudioInfo.maxPitch;
-        bool stopAudioSource = currentAudioInfo.stopAudioSource;
+        // Sets the variables to the currentaudioinfo versions
+        AudioClip[] dialogueTypingSoundClips = m_currentAudioInfo.m_dialogueTypingSoundclips;
+        int frequencyLevel = m_currentAudioInfo.m_frequencyLevel; 
+        float minPitch = m_currentAudioInfo.m_minPitch; 
+        float maxPitch = m_currentAudioInfo.m_maxPitch;
+        bool stopAudioSource = m_currentAudioInfo.m_stopAudioSource;
 
-        if (currentDisplayedCharacterCount % frequencyLevel == 0) // how many character until next sound plays
+        // Plays new random sound when each character in the text has finished being displayed
+        if (_currentDisplayedCharacterCount % frequencyLevel == 0)
         {
             if (stopAudioSource)
             {
-                audioSource.Stop();
+                m_audioSource.Stop();
             }
-            int randomIndex = UnityEngine.Random.Range(0, dialogueTypingSoundClips.Length); // 
-            AudioClip soundClip = dialogueTypingSoundClips[randomIndex]; // plays a random clip
-            audioSource.pitch = UnityEngine.Random.Range(minPitch, maxPitch); // sets pitcg
-            audioSource.PlayOneShot(soundClip); // plays audio
+            int randomIndex = UnityEngine.Random.Range(0, dialogueTypingSoundClips.Length);
+            AudioClip soundClip = dialogueTypingSoundClips[randomIndex];
+            m_audioSource.pitch = UnityEngine.Random.Range(minPitch, maxPitch);
+            m_audioSource.PlayOneShot(soundClip);
         }
     }
 
-// handles the tags from inky 
-    private void HandleTags(List<string> currentTags)
+    private void HandleTags(List<string> _currentTags)
     {
-        // loops through each tag and handle it 
-        foreach(string tag in currentTags)
+        // Loops through each tag and handle it 
+        foreach(string tag in _currentTags)
         {
             string[] splitTag = tag.Split(':');
             if (splitTag.Length != 2)
             {
                 Debug.LogError("Tag could not be appropriately parsed: " + tag);
             }
-            //depending on the value of the tag in the inkjson this will effect the display name, portrait and layout.
+            // Depending on the value of the tag in the inkjson this will effect the display name, portrait and layout.
             string tagKey = splitTag[0].Trim();
             string tagValue = splitTag[1].Trim();
             
+            // Applies Ink tags to the current textbox
             switch (tagKey)
             {
                 case SPEAKER_TAG:
-                    displayNameText.text = tagValue;  // sets display text to tagvalue
+                    m_displayNameText.text = tagValue;
                     break;
                 
                 case PORTRAIT_TAG:
-                    portraitAnimation.Play(tagValue); // sets Animation  to tagvalue
+                    m_portraitAnimation.Play(tagValue);
                     break;
 
                 case LAYOUT_TAG:
-                    layoutAnimator.Play(tagValue); // sets layout to tagvalue
+                    m_layoutAnimator.Play(tagValue);
                     break;
                 case AUDIO_TAG:
-                     SetCurrentAudioInfo(tagValue); // sets Audio to tagvalue
-                     break;
+                    SetCurrentAudioInfo(tagValue);
+                    break;
 
                 default:
                     Debug.LogWarning("Tag came in but is not currently being handled: " + tag);

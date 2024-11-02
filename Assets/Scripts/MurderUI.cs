@@ -1,25 +1,28 @@
-using System.Collections;
-using System.Collections.Generic;
 using TMPro;
-using Unity.VisualScripting;
 using UnityEngine;
 
 public class MurderUI : MonoBehaviour
 {
-    GameController gameHandler;
-    TextMeshProUGUI[] buttons;
-    [SerializeField] private TextMeshProUGUI topText;
-    [SerializeField] private GameObject loseText;
-    [SerializeField] private GameObject winText;
+    [Header("Top Text GameObject")]
+    [SerializeField] private TextMeshProUGUI m_topText;
 
-    // Start is called before the first frame update
+    [Header("Lose Text GameObject")]
+    [SerializeField] private GameObject m_loseText;
+
+    [Header("Win Text GameObject")]
+    [SerializeField] private GameObject m_winText;
+
+
+    private GameController m_gameHandler;
+    private TextMeshProUGUI[] m_buttons;
+
     void Start()
     {
-        gameHandler = GameObject.FindGameObjectWithTag("GameController").GetComponent<GameController>();
-        buttons = gameObject.GetComponentsInChildren<TextMeshProUGUI>();
-        string victimName = gameHandler.GetVictim();
+        m_gameHandler = GameObject.FindGameObjectWithTag("GameController").GetComponent<GameController>();
+        m_buttons = gameObject.GetComponentsInChildren<TextMeshProUGUI>();
+        string victimName = m_gameHandler.GetVictim();
 
-        foreach (TextMeshProUGUI button in buttons)
+        foreach (TextMeshProUGUI button in m_buttons)
         {
             if(button.text == victimName)
             {
@@ -28,24 +31,18 @@ public class MurderUI : MonoBehaviour
             }
         }
 
-        topText.text += gameHandler.GetVictim() + "?";
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
+        m_topText.text += m_gameHandler.GetVictim() + "?";
     }
 
     public void GuessKiller(int killer)
     {
-        if(gameHandler.GuessKiller(killer))
+        if(m_gameHandler.GuessKiller(killer))
         {
-            winText.SetActive(true);
+            m_winText.SetActive(true);
         }
         else
         {
-            loseText.SetActive(true);
+            m_loseText.SetActive(true);
         }    
     }
 }

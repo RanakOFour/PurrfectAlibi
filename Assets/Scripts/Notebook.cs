@@ -4,14 +4,22 @@ using UnityEngine;
 
 public class Notebook : MonoBehaviour
 {
+    [Header("Textbox")]
+    [SerializeField] private List<TextMeshProUGUI> m_Textboxes;
+
+    [Header("Notebook Image")]
+    [SerializeField] private GameObject m_NotebookImage;
+
+    [Header("Notes")]
+    [SerializeField] private GameObject m_Notes;
+
+    [Header("Network")]
+    [SerializeField] private GameObject m_Network;
+
+
     private string[,] m_KnownClues;
     private int[] m_KnownRelations;
 
-    [SerializeField] private List<TextMeshProUGUI> m_Textboxes;
-    [SerializeField] private GameObject m_NotebookImage;
-    [SerializeField] private GameObject m_Notes;
-    [SerializeField] private GameObject m_Network;
-    // Start is called before the first frame update
     void Start()
     {
         DontDestroyOnLoad(this);

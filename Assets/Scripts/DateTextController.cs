@@ -3,14 +3,14 @@ using UnityEngine;
 
 public class DateTextController : MonoBehaviour
 {
-    TextMeshProUGUI dateText;
-    TextMeshProUGUI dayPartText;
+    private TextMeshProUGUI m_dateText;
+    private TextMeshProUGUI m_dayPartText;
 
     // Start is called before the first frame update
     void Start()
     {
-        dateText = GetComponent<TextMeshProUGUI>();
-        dayPartText = GameObject.FindGameObjectWithTag("TimeOfDay").GetComponent<TextMeshProUGUI>();
+        m_dateText = GetComponent<TextMeshProUGUI>();
+        m_dayPartText = GameObject.FindGameObjectWithTag("TimeOfDay").GetComponent<TextMeshProUGUI>();
         GameController gameHandler = GameObject.FindGameObjectWithTag("GameController").GetComponent<GameController>();
         ShowTime(gameHandler.GetDate(), gameHandler.GetTimeOfDay());
     }
@@ -21,16 +21,16 @@ public class DateTextController : MonoBehaviour
         switch(dayPart)
         {
             case 0:
-                dayPartText.text = "Morning";
+                m_dayPartText.text = "Morning";
                 break;
             case 1:
-                dayPartText.text = "Midday";
+                m_dayPartText.text = "Midday";
                 break;
             case 2:
-                dayPartText.text = "Evening";
+                m_dayPartText.text = "Evening";
                 break;
         }
 
-        dateText.text = "Date: " + date.ToString() + "/8";
+        m_dateText.text = "Date: " + date.ToString() + "/8";
     }
 }

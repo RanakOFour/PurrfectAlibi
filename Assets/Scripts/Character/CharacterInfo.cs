@@ -6,11 +6,9 @@ using UnityEngine;
 public class CharacterInfo
 {
     private int m_id;
-    private int spokenTo;
     private bool m_isVictim;
     private bool m_isMurderer;
     private string m_name;
-    private string m_description;
     private int[] m_hangoutSpots;
     private Dictionary<int, int> m_characterRelations;
     private Story m_story;
@@ -22,12 +20,10 @@ public class CharacterInfo
         string[] seperated = fileData.Split(']');
         this.m_id = id;
         this.m_name = seperated[0];
-        this.m_description = seperated[1];
         this.m_characterRelations = new Dictionary<int, int>();
         this.m_hangoutSpots = new int[3];
         this.m_story = new Story(story.text);
         this.m_clues = new string[3];
-        this.spokenTo = 0;
 
         for (int i = 0; i < 8; i++)
         {
@@ -45,7 +41,6 @@ public class CharacterInfo
 
         //Print finished character info
         string logString = "Name: " + m_name + "\n" +
-                  "Desc: " + m_description + "\n" +
                   "Hangouts: ";
         
         for(int i = 0; i < m_hangoutSpots.Length; i++)
@@ -92,9 +87,6 @@ public class CharacterInfo
     public string Name()
     { return m_name; }
 
-    public string Description()
-    { return m_description; }
-
     public int GetCurrentHangout(int time)
     {
         return m_hangoutSpots[time];
@@ -130,14 +122,6 @@ public class CharacterInfo
     {
         string[] clue = new string[] { m_alibi, m_clues[0], m_clues[1], m_clues[2] };
         return clue;
-    }
-
-    public int GetSpokenTo()
-    { return spokenTo; }
-
-    public void AddSpoken()
-    {
-        spokenTo++;
     }
 
     public void SetRelationClue(int victimId)

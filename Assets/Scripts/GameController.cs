@@ -5,17 +5,22 @@ using UnityEngine.SceneManagement;
 
 public class GameController : MonoBehaviour
 {
-    public bool shouldAdvanceTime = false;
+    [Header("Introduction Text")]
+    [SerializeField] private TextAsset m_introductionText;
+
+    [Header("Blank NPCStory")]
+    [SerializeField] private TextAsset m_npcText;
+
+
     private bool m_gameOver;
+    private bool m_shouldAdvanceTime = false;
     private int m_dayPart;
     private int m_currentDay;
     private int m_currentRoom = -1;
-    private CharacterInfoHandler m_characterInfo;
-    private DialogueManager dm;
-    private Notebook m_Notebook;
-    private LocationHandler m_LocationHandler;
-    [SerializeField] private TextAsset IntroductionText;
-    [SerializeField] private TextAsset NPCText;
+    private CharacterInfoHandler m_characterInfos;
+    private DialogueManager m_dialogueManager;
+    private Notebook m_notebook;
+    private LocationHandler m_locationHandler;
 
     private void Start()
     {
@@ -24,7 +29,7 @@ public class GameController : MonoBehaviour
         m_dayPart = 0;
         m_currentDay = 23;
 
-        m_Notebook = GameObject.FindGameObjectWithTag("Notebook").GetComponent<Notebook>();
+        m_notebook = GameObject.FindGameObjectWithTag("Notebook").GetComponent<Notebook>();
 
         //Gets seed as a long number that I can easily scan through digits with
         string strSeed = "";
@@ -35,30 +40,30 @@ public class GameController : MonoBehaviour
         }
         //Pass seed into character info handler
         strSeed = strSeed.Substring(0, 64);
-        m_characterInfo = new CharacterInfoHandler();
-        m_characterInfo.Initialise(strSeed, NPCText);
+        m_characterInfos = new CharacterInfoHandler();
+        m_characterInfos.Initialise(strSeed, m_npcText);
 
         //Get a random char from the seed and that digit mod 7 is the murderer
         int victim = int.Parse(strSeed[Mathf.RoundToInt(UnityEngine.Random.Range(0, 63))].ToString()) % 7;
-        m_characterInfo.AssignVictim(victim);
+        m_characterInfos.AssignVictim(victim);
 
-        int murderLocation = m_characterInfo.GetMurderer().GetCurrentHangout(2);
+        int murderLocation = m_characterInfos.GetMurderer().GetCurrentHangout(2);
         string initMurderInfo = "The murder took place near Location " + (murderLocation + 1).ToString() + " on the night of the 22nd.";
 
-        m_Notebook.AddClue(7, initMurderInfo);
-        m_Notebook.AddClue(m_characterInfo.GetVictim().GetId(), "Died at Location " + (murderLocation + 1).ToString());
+        m_notebook.AddClue(7, initMurderInfo);
+        m_notebook.AddClue(m_characterInfos.GetVictim().GetId(), "Died at Location " + (murderLocation + 1).ToString());
 
-        Story introduction = new Story(IntroductionText.text);
+        Story introduction = new Story(m_introductionText.text);
         introduction.variablesState["murderLocation"] = (murderLocation + 1).ToString();
-        introduction.variablesState["victim"] = m_characterInfo.GetVictim().Name();
+        introduction.variablesState["victim"] = m_characterInfos.GetVictim().Name();
 
-        dm = DialogueManager.GetInstance();
-        dm.EnterDialogueMode(introduction);
+        m_dialogueManager = DialogueManager.GetInstance();
+        m_dialogueManager.EnterDialogueMode(introduction);
     }
 
     private void Update()
     {
-       if(shouldAdvanceTime && !dm.dialogueIsPlaying)
+       if(m_shouldAdvanceTime && !m_dialogueManager.m_dialogueIsPlaying)
        {
             AdvanceTime();
 
@@ -96,9 +101,9 @@ public class GameController : MonoBehaviour
         return "Location " + (m_currentRoom + 1);
     }
 
-    public bool GuessKiller(int killer)
+    public bool GuessKiller(int _killer)
     {
-        if(m_characterInfo.GetMurderer().GetId() == killer)
+        if(m_characterInfos.GetMurderer().GetId() == _killer)
         {
             return true;
         }
@@ -108,7 +113,7 @@ public class GameController : MonoBehaviour
 
     public string GetVictim()
     {
-        return m_characterInfo.GetVictim().Name();
+        return m_characterInfos.GetVictim().Name();
     }
 
     public void AdvanceTime()
@@ -126,7 +131,7 @@ public class GameController : MonoBehaviour
             m_gameOver = true;
         }
 
-        shouldAdvanceTime = false;
+        m_shouldAdvanceTime = false;
     }
 
     public int GetTimeOfDay()
@@ -137,7 +142,7 @@ public class GameController : MonoBehaviour
 
     public List<int> GetPresentCharacters()
     {
-        return m_characterInfo.GetCharactersAtLocation(m_currentRoom, m_dayPart);
+        return m_characterInfos.GetCharactersAtLocation(m_currentRoom, m_dayPart);
     }
 
     public int GetRoom()
@@ -145,9 +150,9 @@ public class GameController : MonoBehaviour
         return m_currentRoom;
     }
 
-    public CharacterInfo GetInfo(string character)
+    public CharacterInfo GetCharInfo(int _charId)
     {
-        return m_characterInfo.GetInfo(character);
+        return m_characterInfos.GetInfo(_charId);
     }
 
     public void IncrementDate()
@@ -155,8 +160,8 @@ public class GameController : MonoBehaviour
         AdvanceTime(); // Use the existing method to update time
     }
 
-    public void AddClue(int id, string c)
+    public void AddClue(int _charId, string _clue)
     {
-        m_Notebook.AddClue(id, c);
+        m_notebook.AddClue(_charId, _clue);
     }
 }
