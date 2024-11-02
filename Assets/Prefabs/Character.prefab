@@ -66,8 +66,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: efdf955f20bf2954082541ed45047836, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  visualCue: {fileID: 6189423247764802993}
-  inkJSON: {fileID: 4900000, guid: d28263fd32f85684f92c0a7ccf6b7841, type: 3}
+  m_visualCue: {fileID: 6189423247764802993}
 --- !u!1 &6189423247764802993
 GameObject:
   m_ObjectHideFlags: 0
@@ -221,6 +220,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e8ae4792bafd86b4091f16af7538d572, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  m_id: 0
 --- !u!1 &7959633872160012155
 GameObject:
   m_ObjectHideFlags: 0

@@ -135,7 +135,7 @@ public class DialogueManager : MonoBehaviour
         m_dialoguePanel.SetActive(false);
         m_dialogueText.text = "";
 
-        m_OnDialogueEnd?.Invoke();
+        OnDialogueEnd.Invoke();
 
         SetCurrentAudioInfo(m_defaultAudioInfo.m_id);
     }

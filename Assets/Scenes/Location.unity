@@ -131,6 +131,11 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 1920813857}
     m_Modifications:
+    - target: {fileID: 444845827427994961, guid: 356d4b2a25b43564489782d2a27b539b,
+        type: 3}
+      propertyPath: m_id
+      value: 2
+      objectReference: {fileID: 0}
     - target: {fileID: 4785899661942683701, guid: 356d4b2a25b43564489782d2a27b539b,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -562,6 +567,11 @@ PrefabInstance:
       propertyPath: m_LocalPosition.x
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 444845827427994961, guid: 356d4b2a25b43564489782d2a27b539b,
+        type: 3}
+      propertyPath: m_id
+      value: 6
+      objectReference: {fileID: 0}
     - target: {fileID: 4785899661942683701, guid: 356d4b2a25b43564489782d2a27b539b,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -749,7 +759,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3a3dbbe88bb00d64993bfd541ac1a26b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  text: {fileID: 367774907}
+  m_text: {fileID: 367774907}
 --- !u!1 &605551142
 GameObject:
   m_ObjectHideFlags: 0
@@ -905,6 +915,11 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 1920813857}
     m_Modifications:
+    - target: {fileID: 444845827427994961, guid: 356d4b2a25b43564489782d2a27b539b,
+        type: 3}
+      propertyPath: m_id
+      value: 5
+      objectReference: {fileID: 0}
     - target: {fileID: 4785899661942683701, guid: 356d4b2a25b43564489782d2a27b539b,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -1262,6 +1277,11 @@ PrefabInstance:
       propertyPath: m_LocalPosition.x
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 444845827427994961, guid: 356d4b2a25b43564489782d2a27b539b,
+        type: 3}
+      propertyPath: m_id
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 3819189162711266805, guid: 356d4b2a25b43564489782d2a27b539b,
         type: 3}
       propertyPath: inkJSON
@@ -1447,6 +1467,11 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 1920813857}
     m_Modifications:
+    - target: {fileID: 444845827427994961, guid: 356d4b2a25b43564489782d2a27b539b,
+        type: 3}
+      propertyPath: m_id
+      value: 3
+      objectReference: {fileID: 0}
     - target: {fileID: 4785899661942683701, guid: 356d4b2a25b43564489782d2a27b539b,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -1708,6 +1733,11 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 1920813857}
     m_Modifications:
+    - target: {fileID: 444845827427994961, guid: 356d4b2a25b43564489782d2a27b539b,
+        type: 3}
+      propertyPath: m_id
+      value: 4
+      objectReference: {fileID: 0}
     - target: {fileID: 4785899661942683701, guid: 356d4b2a25b43564489782d2a27b539b,
         type: 3}
       propertyPath: m_LocalPosition.x
